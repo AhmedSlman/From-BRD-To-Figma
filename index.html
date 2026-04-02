@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل الـ UI Designer مع AI Agents | من البريف للـ Handoff</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --border: #1e2d45;
+  --ink: #e2e8f0;
+  --ink2: #cbd5e1;
+  --ink3: #64748b;
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+  --success: #10b981;
+  --phase1: #f97316;
+  --phase2: #eab308;
+  --phase3: #3b82f6;
+  --phase4: #a855f7;
+  --phase5: #10b981;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.75;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  background: linear-gradient(135deg, #0a0e1a 0%, #0d1b2e 50%, #0a0e1a 100%);
+  border-bottom: 1px solid var(--border);
+  color: #e2e8f0;
+  padding: 80px 48px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: 'AI';
+  position: absolute;
+  font-size: 320px;
+  font-weight: 900;
+  color: rgba(0,212,255,0.04);
+  top: -60px; left: -20px;
+  line-height: 1;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.hero-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,212,255,0.3); }
+h1 {
+  font-size: clamp(30px, 5.5vw, 58px);
+  font-weight: 900; line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h1 span { -webkit-text-fill-color: var(--accent); color: var(--accent); }
+.hero-sub {
+  font-size: 16px; color: #64748b;
+  max-width: 560px; margin-bottom: 40px;
+}
+.hero-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #c5b9ad; padding: 5px 14px;
+  border-radius: 4px; font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ═══ JOURNEY BAR ═══ */
+.journey {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  position: sticky; top: 0; z-index: 90;
+  overflow-x: auto;
+}
+.journey-inner {
+  max-width: 880px; margin: 0 auto;
+  display: flex; gap: 0;
+}
+.j-step {
+  padding: 18px 20px 16px;
+  font-size: 12px; font-weight: 700;
+  color: var(--ink3); text-decoration: none;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap; transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px;
+  cursor: pointer;
+}
+.j-step:hover { color: var(--ink); border-bottom-color: var(--border); }
+.j-step.p1:hover, .j-step.p1.active { border-bottom-color: var(--phase1); color: var(--phase1); }
+.j-step.p2:hover, .j-step.p2.active { border-bottom-color: var(--phase2); color: var(--phase2); }
+.j-step.p3:hover, .j-step.p3.active { border-bottom-color: var(--phase3); color: var(--phase3); }
+.j-step.p4:hover, .j-step.p4.active { border-bottom-color: var(--phase4); color: var(--phase4); }
+.j-step.p5:hover, .j-step.p5.active { border-bottom-color: var(--phase5); color: var(--phase5); }
+.j-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: 'JetBrains Mono', monospace;
+  border: 1.5px solid currentColor; flex-shrink: 0;
+}
+
+/* ═══ MAIN ═══ */
+.main { max-width: 880px; margin: 0 auto; padding: 0 48px 80px; }
+
+/* ═══ PHASE ═══ */
+.phase {
+  margin-top: 72px;
+  scroll-margin-top: 64px;
+}
+.phase-header {
+  display: flex; align-items: flex-start; gap: 20px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+}
+.phase-num {
+  width: 56px; height: 56px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 900; flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  color: #fff;
+}
+.p1-col .phase-num { background: var(--phase1); }
+.p2-col .phase-num { background: var(--phase2); }
+.p3-col .phase-num { background: var(--phase3); }
+.p4-col .phase-num { background: var(--phase4); }
+.p5-col .phase-num { background: var(--phase5); }
+
+.phase-meta { flex: 1; }
+.phase-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.p1-col .phase-label { color: var(--phase1); }
+.p2-col .phase-label { color: var(--phase2); }
+.p3-col .phase-label { color: var(--phase3); }
+.p4-col .phase-label { color: var(--phase4); }
+.p5-col .phase-label { color: var(--phase5); }
+
+.phase-title { font-size: 26px; font-weight: 900; line-height: 1.2; margin-bottom: 6px; }
+.phase-desc { font-size: 14px; color: var(--ink3); }
+
+/* ═══ CARDS ═══ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-size: 15px; font-weight: 700;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.card-title .icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; background: var(--surface2);
+  flex-shrink: 0;
+}
+.card p { font-size: 14px; color: var(--ink2); margin-bottom: 10px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ═══ PROMPT BLOCK ═══ */
+.prompt-wrap { margin-bottom: 20px; }
+.prompt-label {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 8px;
+}
+.prompt-label span {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ink3);
+}
+.prompt-label .tool-badge {
+  font-size: 10px; font-weight: 700;
+  padding: 2px 10px; border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.badge-readdy { background: rgba(249,115,22,0.15); color: var(--phase1); border: 1px solid rgba(249,115,22,0.3); }
+.badge-claude { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.3); }
+.badge-figma { background: rgba(168,85,247,0.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.3); }
+
+.prompt-box {
+  background: #0d1117;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.prompt-box .pb-header {
+  background: #161b22;
+  padding: 10px 16px;
+  font-size: 11px; color: #4a5568;
+  font-family: 'JetBrains Mono', monospace;
+  border-bottom: 1px solid #1e2d45;
+  display: flex; align-items: center; gap: 8px;
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.prompt-box pre {
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; line-height: 1.9;
+  color: #cdd9e5;
+  white-space: pre-wrap; word-break: break-word;
+}
+.cm { color: #4a5568; font-style: italic; }
+.hi { color: #f6a96a; }
+.hi2 { color: #7ab8e8; }
+.hi3 { color: #7ee787; }
+
+/* ═══ COMPARE ═══ */
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.cmp-col { border-radius: 10px; overflow: hidden; border: 1px solid; }
+.cmp-bad { border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.05); }
+.cmp-good { border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.05); }
+.cmp-head {
+  padding: 10px 14px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.cmp-bad .cmp-head { background: rgba(239,68,68,0.12); color: #f87171; border-bottom: 1px solid rgba(239,68,68,0.2); }
+.cmp-good .cmp-head { background: rgba(16,185,129,0.12); color: #34d399; border-bottom: 1px solid rgba(16,185,129,0.2); }
+.cmp-col pre {
+  padding: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px; line-height: 1.75;
+  white-space: pre-wrap; word-break: break-word;
+}
+.cmp-bad pre { color: #fca5a5; }
+.cmp-good pre { color: #a7f3d0; }
+
+/* ═══ TABLE ═══ */
+.map-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 13px; }
+.map-table th {
+  background: var(--surface2);
+  padding: 10px 14px; text-align: right;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink3); border-bottom: 2px solid var(--border);
+}
+.map-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink2);
+}
+.map-table tr:hover td { background: var(--surface2); }
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--surface2); color: var(--ink);
+  padding: 1px 7px; border-radius: 4px; font-size: 11px;
+}
+
+/* ═══ STEPS LIST ═══ */
+.steps { list-style: none; }
+.steps li {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.steps li:last-child { border-bottom: none; }
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  color: #fff; margin-top: 1px;
+}
+.steps li .step-content { flex: 1; }
+.steps li .step-content strong { font-size: 14px; display: block; margin-bottom: 4px; }
+.steps li .step-content span { font-size: 13px; color: var(--ink3); }
+
+/* ═══ CHECKLIST ═══ */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13.5px;
+}
+.checklist li:last-child { border-bottom: none; }
+.cbox {
+  width: 18px; height: 18px; border-radius: 4px;
+  border: 2px solid var(--border);
+  flex-shrink: 0; margin-top: 2px;
+}
+.checklist .cat-row {
+  background: var(--surface2);
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: var(--ink3); padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ═══ INFO BOX ═══ */
+.info-box {
+  background: rgba(249,115,22,0.07);
+  border: 1px solid rgba(249,115,22,0.2);
+  border-right: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  font-size: 13.5px; color: var(--ink2);
+}
+.info-box.blue {
+  background: rgba(0,212,255,0.06);
+  border-color: rgba(0,212,255,0.2);
+  border-right-color: var(--accent);
+}
+.info-box strong { color: var(--ink); }
+
+/* ═══ TAG ═══ */
+.tag-inline {
+  display: inline-block;
+  font-size: 11px; font-family: 'JetBrains Mono', monospace;
+  padding: 1px 8px; border-radius: 4px; margin: 1px;
+}
+.t-orange { background: rgba(249,115,22,0.15); color: var(--phase1); border: 1px solid rgba(249,115,22,0.3); }
+.t-blue { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.25); }
+.t-green { background: rgba(16,185,129,0.12); color: var(--success); border: 1px solid rgba(16,185,129,0.25); }
+.t-purple { background: rgba(168,85,247,0.12); color: var(--phase4); border: 1px solid rgba(168,85,247,0.25); }
+
+/* ═══ DIVIDER ═══ */
+.phase-divider {
+  margin: 64px 0 0;
+  display: flex; align-items: center; gap: 16px;
+}
+.phase-divider::before, .phase-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.phase-divider span {
+  font-size: 11px; color: var(--ink3);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* ═══ PRINT ═══ */
+.print-btn {
+  position: fixed; bottom: 28px; left: 28px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border: none; border-radius: 50px;
+  padding: 12px 24px; font-size: 13px; font-weight: 700;
+  font-family: 'Cairo', sans-serif;
+  cursor: pointer; box-shadow: 0 8px 32px rgba(0,212,255,0.25);
+  display: flex; align-items: center; gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 100;
+}
+.print-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,212,255,0.35); }
+
+/* ═══ GRID 2 ═══ */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+
+@media(max-width:640px) {
+  .main { padding: 0 20px 60px; }
+  .hero { padding: 48px 20px 56px; }
+  .compare, .grid2 { grid-template-columns: 1fr; }
+  .journey { padding: 0 20px; }
+}
+@media print {
+  body { background: #fff; }
+  .print-btn, .journey { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">UI Designer AI Workflow Guide</div>
+    <h1>من الـ BRD<br>للـ Figma Handoff<br><span>بـ AI Agents</span></h1>
+    <p class="hero-sub">دليل عملي خطوة بخطوة للـ UI Designer — من أول ما تستلم ملفات المشروع لحد ما تسلّم التصميم للـ developers بشكل production-ready</p>
+    <div class="hero-chips">
+      <span class="chip">readdy.ai</span>
+      <span class="chip">Claude / ChatGPT</span>
+      <span class="chip">Figma</span>
+      <span class="chip">5 Phases</span>
+      <span class="chip">Prompts جاهزة</span>
+    </div>
+  </div>
+</div>
+
+<!-- JOURNEY BAR -->
+<nav class="journey">
+  <div class="journey-inner">
+    <a class="j-step p1" href="#phase1"><span class="j-num">1</span> تحليل الـ Docs</a>
+    <a class="j-step p2" href="#phase2"><span class="j-num">2</span> Research & Moodboard</a>
+    <a class="j-step p3" href="#phase3"><span class="j-num">3</span> Design System</a>
+    <a class="j-step p4" href="#phase4"><span class="j-num">4</span> الشاشات بـ readdy</a>
+    <a class="j-step p5" href="#phase5"><span class="j-num">5</span> Figma & Handoff</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ════════════════════════════════════════
+     PHASE 1 — تحليل الـ DOCS
+════════════════════════════════════════ -->
+<div class="phase p1-col" id="phase1">
+  <div class="phase-header">
+    <div class="phase-num">01</div>
+    <div class="phase-meta">
+      <div class="phase-label">Phase 1 — قبل ما تفتح أي tool</div>
+      <div class="phase-title">تحليل الـ BRD / SRS / User Stories</div>
+      <div class="phase-desc">خلّي الـ AI يقرأ الـ docs ويطلعلك كل اللي محتاجه كـ designer قبل ما تبدأ أي تصميم</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <strong>ليه مهم؟</strong> الـ AI لو مش فاهم البيزنس context صح، هيولّد تصميم generic مش محتاجه. 10 دقايق تحليل في الأول بتوفّر ساعات تعديل في الآخر.
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🧠</div> الخطوة الأولى — اسأل Claude يحلل الـ Docs</div>
+    <p>ارفع الـ BRD/SRS على Claude أو ChatGPT واعمل الـ prompt ده قبل أي حاجة تانية:</p>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude / ChatGPT</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> تحليل الـ BRD/SRS</div>
+        <pre><span class="cm"># ارفع الـ PDF/Word مع الـ prompt ده</span>
+
+أنا UI/UX Designer وبدأ أشتغل على المشروع ده.
+حلّل الـ document ده واعمل ليا:
+
+<span class="hi">1. ملخص المشروع (5 جمل بالعربي)</span>
+   - ايه المشكلة اللي بتحلها؟
+   - مين المستخدم الأساسي (Primary User)?
+   - ايه الـ core actions اللي المستخدم هيعملها؟
+
+<span class="hi">2. قائمة الشاشات</span>
+   - اعملي جدول بكل screen مع:
+     * اسم الشاشة
+     * وظيفتها (1 جملة)
+     * الـ user actions جوّاها
+     * هل في auth؟ (public / private)
+
+<span class="hi">3. الـ User Flows الرئيسية</span>
+   - اكتب كل flow خطوة بخطوة
+   - مثال: "Onboarding Flow: Splash → Login → Home"
+
+<span class="hi">4. نقاط التحذير للـ Designer</span>
+   - أي requirements ممكن تأثر على الـ UX
+   - Edge cases مهمة لازم أراعيها
+
+<span class="hi">5. أسئلة ناقصة</span>
+   - أي معلومة مش موجودة في الـ doc محتاجها كـ designer</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🗺️</div> الخطوة التانية — استخرج الـ Information Architecture</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude / ChatGPT</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Information Architecture</div>
+        <pre>بناءً على تحليلنا السابق، اعمل الـ Information Architecture للتطبيق:
+
+<span class="hi">1. Navigation Structure</span>
+   - ايه الـ bottom nav items؟ (لو mobile)
+   - ايه الـ main sections؟
+   - ايه الـ sub-pages لكل section؟
+
+<span class="hi">2. Screen Inventory Table</span>
+   Format:
+   | Screen Name | Parent | Type | Priority |
+   |-------------|--------|------|----------|
+   
+   Types: Onboarding / Auth / Main / Detail / Modal / Settings
+
+<span class="hi">3. اقترح أسماء الـ Frames في Figma</span>
+   بالـ naming convention: [section]/[screen]
+   مثال: auth/login | home/feed | product/detail
+
+<span class="hi">4. أولويات التصميم</span>
+   رتّب الشاشات من الأهم للأقل أهمية للـ MVP</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">📋</div> Output المتوقع من Phase 1</div>
+    <ul class="steps">
+      <li>
+        <div class="step-num" style="background:var(--phase1)">✓</div>
+        <div class="step-content">
+          <strong>Screen List كاملة</strong>
+          <span>جدول بكل شاشة في المشروع مع وظيفتها</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase1)">✓</div>
+        <div class="step-content">
+          <strong>User Flows موثّقة</strong>
+          <span>كل flow من أوله لآخره قبل ما تبدأ ترسم</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase1)">✓</div>
+        <div class="step-content">
+          <strong>Figma Frame Names جاهزة</strong>
+          <span>مش هتفكر في تسمية frames — الـ AI جهّزها</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase1)">✓</div>
+        <div class="step-content">
+          <strong>أسئلة ناقصة للـ PM/Client</strong>
+          <span>تبعتها وتأكدت من الإجابات قبل التصميم</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="phase-divider"><span>Phase 2</span></div>
+
+<!-- ════════════════════════════════════════
+     PHASE 2 — RESEARCH & MOODBOARD
+════════════════════════════════════════ -->
+<div class="phase p2-col" id="phase2">
+  <div class="phase-header">
+    <div class="phase-num">02</div>
+    <div class="phase-meta">
+      <div class="phase-label">Phase 2 — قبل ما تفتح Figma</div>
+      <div class="phase-title">Research & Visual Direction</div>
+      <div class="phase-desc">استخدم الـ AI تحدد الـ visual language اللي يناسب المشروع قبل ما تبدأ تصميم أي شاشة</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🎨</div> حدد الـ Visual Direction مع Claude</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude / ChatGPT</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Visual Direction</div>
+        <pre>أنا بصمم [نوع التطبيق] للـ [target audience].
+المشروع ده [وصف مختصر من الـ BRD].
+
+<span class="hi">اقترح Visual Direction مناسب:</span>
+
+1. <span class="hi2">Personality Keywords</span> (5-7 كلمة)
+   مثال: Modern, Trustworthy, Clean, Energetic
+
+2. <span class="hi2">Color Palette</span>
+   - Primary color (مع مبرر ليه هذا اللون)
+   - Secondary color
+   - Accent color
+   - Background + Surface colors
+   - Error / Success / Warning colors
+   - اديني الـ HEX codes
+
+3. <span class="hi2">Typography</span>
+   - Font للـ headings (من Google Fonts)
+   - Font للـ body
+   - Type scale مقترح (H1, H2, H3, Body, Caption)
+
+4. <span class="hi2">Visual Style</span>
+   - Flat / Neumorphic / Glassmorphism / Material / Minimal
+   - Corner radius المناسب (sharp 0px / rounded 8px / pill 24px)
+   - Shadows: none / subtle / prominent
+   - Illustrations أو Photos أو Icons بس؟
+
+5. <span class="hi2">Competitor Analysis</span>
+   - اذكر 3 apps ممكن نأخذ منها inspiration
+   - مع ايه اللي نأخذه وايه اللي نتجنبه</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🖼️</div> استخدم readdy.ai لتوليد الـ Moodboard</div>
+    <p>بعد ما Claude يديك الـ direction، اتحول لـ readdy وجرب أكتر من variant:</p>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-readdy">readdy.ai</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> readdy — Moodboard Exploration</div>
+        <pre><span class="cm"># Prompt 1 — الـ Direction الرئيسي</span>
+Design a [app type] mobile app screen.
+Style: [visual style من Claude].
+Colors: Primary [HEX], Background [HEX].
+Target users: [audience].
+Mood: [keywords من Claude].
+Show the [screen name] screen.
+
+<span class="cm">---</span>
+
+<span class="cm"># Prompt 2 — Direction بديل (قارن)</span>
+Design a [app type] mobile app screen.
+Style: Clean minimal with lots of white space.
+Colors: Primary [HEX alternative].
+Typography-forward design.
+Show the same [screen name] screen.
+
+<span class="cm">---</span>
+
+<span class="cm"># Prompt 3 — Dark Mode version</span>
+Design a [app type] mobile app screen.
+Dark theme. Primary [HEX], Surface [dark HEX].
+Same content and layout as before.
+Premium feel.</pre>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>نصيحة:</strong> اعمل على الأقل 3 directions مختلفة واعرضهم على الـ stakeholders قبل ما تبدأ الـ Design System. وفّر نفسك من "مش بحبه" بعد ما تخلص.
+    </div>
+  </div>
+</div>
+
+<div class="phase-divider"><span>Phase 3</span></div>
+
+<!-- ════════════════════════════════════════
+     PHASE 3 — DESIGN SYSTEM
+════════════════════════════════════════ -->
+<div class="phase p3-col" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num">03</div>
+    <div class="phase-meta">
+      <div class="phase-label">Phase 3 — قبل أي شاشة</div>
+      <div class="phase-title">بناء الـ Design System في Figma</div>
+      <div class="phase-desc">الـ Design System هو القاعدة — مش بناءه صح بيخلي الـ AI يولّد شاشات inconsistent</div>
+    </div>
+  </div>
+
+  <div class="info-box blue">
+    <strong>قاعدة ذهبية:</strong> مش هتفتح readdy وتعمل شاشة لحد ما يكون عندك Design System جاهز في Figma. الـ readdy بيشتغل أحسن لما بتديه visual reference واضح.
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🎯</div> هيكل الـ Figma File الصح</div>
+
+    <div class="compare">
+      <div class="cmp-col cmp-bad">
+        <div class="cmp-head">❌ غلط</div>
+        <pre>📄 Page 1
+  ← شاشات عشوائية
+  ← colors hardcoded
+  ← مفيش components
+
+📄 Page 2
+  ← "new designs"</pre>
+      </div>
+      <div class="cmp-col cmp-good">
+        <div class="cmp-head">✅ صح</div>
+        <pre>🎨 Design System
+  └── Colors / Typography / Spacing
+🧩 Components
+  └── Atoms / Molecules / Organisms
+📱 Screens
+  └── auth/ home/ product/
+📋 Flows & Prototypes</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🎨</div> Figma Variables Setup — اسأل Claude يعملها</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude / ChatGPT</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Figma Variables Structure</div>
+        <pre>اعملي قائمة كاملة بـ Figma Variables محتاج أعملها.
+الـ Color palette اللي اخترناه:
+- Primary: [HEX]
+- Secondary: [HEX]
+- Background: [HEX]
+- Surface: [HEX]
+- Text: [HEX]
+
+<span class="hi">اعمل الـ Variables على النظام ده:</span>
+
+<span class="hi2">Color Variables:</span>
+brand/primary
+brand/primary-hover
+brand/primary-disabled
+brand/secondary
+semantic/success
+semantic/error
+semantic/warning
+semantic/info
+background/default
+background/surface
+background/elevated
+text/primary
+text/secondary
+text/disabled
+text/inverse
+border/default
+border/focus
+
+<span class="hi2">Spacing Variables (8px grid):</span>
+spacing/1 = 4px
+spacing/2 = 8px
+spacing/3 = 12px
+spacing/4 = 16px
+spacing/5 = 20px
+spacing/6 = 24px
+spacing/8 = 32px
+spacing/10 = 40px
+spacing/12 = 48px
+
+<span class="hi2">Border Radius:</span>
+radius/sm / radius/md / radius/lg / radius/full
+
+<span class="hi2">Typography Styles:</span>
+اعمل كل الـ text styles محتاجها مع الـ font size و weight</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🧩</div> تسمية الـ Components والـ Layers</div>
+
+    <table class="map-table">
+      <thead>
+        <tr>
+          <th>نوع الـ Component</th>
+          <th>❌ غلط</th>
+          <th>✅ صح</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Button</td>
+          <td><code>Rectangle 3</code></td>
+          <td><code>button/primary/default</code></td>
+        </tr>
+        <tr>
+          <td>Input Field</td>
+          <td><code>Group 12</code></td>
+          <td><code>input/text/default</code></td>
+        </tr>
+        <tr>
+          <td>Card</td>
+          <td><code>Frame 892</code></td>
+          <td><code>card/product/default</code></td>
+        </tr>
+        <tr>
+          <td>Icon</td>
+          <td><code>Vector</code></td>
+          <td><code>icon/search</code></td>
+        </tr>
+        <tr>
+          <td>Screen</td>
+          <td><code>iPhone 15 - 1</code></td>
+          <td><code>home/feed</code></td>
+        </tr>
+        <tr>
+          <td>State</td>
+          <td><code>Variant1</code></td>
+          <td><code>state=default</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Component List</div>
+        <pre>بناءً على شاشات التطبيق دي: [الست screen list]
+
+اعملي قائمة بكل الـ Figma Components محتاج أبنيها:
+
+Format:
+| Component Name | Variants/States | Props |
+|----------------|-----------------|-------|
+
+Categories:
+- Atoms (Button, Input, Icon, Badge, Avatar)
+- Molecules (Card, List Item, Form Field, Nav Item)  
+- Organisms (Header, Bottom Nav, Modal, Form)
+- Templates (Screen layouts)</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-divider"><span>Phase 4</span></div>
+
+<!-- ════════════════════════════════════════
+     PHASE 4 — الشاشات بـ READDY
+════════════════════════════════════════ -->
+<div class="phase p4-col" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num">04</div>
+    <div class="phase-meta">
+      <div class="phase-label">Phase 4 — الشغل الفعلي</div>
+      <div class="phase-title">تصميم الشاشات بـ readdy.ai</div>
+      <div class="phase-desc">دلوقتي عندك كل حاجة — ابدأ تولّد الشاشات بطريقة منهجية مش عشوائية</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">📐</div> قاعدة الـ Prompt الكامل في readdy</div>
+    <p>كل prompt في readdy لازم يشمل الـ 6 عناصر دول:</p>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Template الأساسي</span>
+        <span class="tool-badge badge-readdy">readdy.ai</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Readdy Full Prompt Template</div>
+        <pre><span class="cm"># 1️⃣ APP CONTEXT</span>
+<span class="hi">[App Type]</span> mobile app. [وصف جملة واحدة].
+Target: <span class="hi">[audience]</span>.
+
+<span class="cm"># 2️⃣ VISUAL STYLE</span>
+Style: <span class="hi">[الـ style اللي اخترته]</span>.
+Primary color: <span class="hi">[HEX]</span>.
+Background: <span class="hi">[HEX]</span>.
+Font: <span class="hi">[Font Name]</span>.
+Corner radius: <span class="hi">[Xpx]</span>.
+
+<span class="cm"># 3️⃣ SCREEN NAME & PURPOSE</span>
+Screen: <span class="hi">[اسم الشاشة]</span>.
+Purpose: <span class="hi">[وظيفتها في جملة]</span>.
+
+<span class="cm"># 4️⃣ CONTENT & COMPONENTS</span>
+Include:
+- <span class="hi2">[component 1]</span>: [وصف المحتوى]
+- <span class="hi2">[component 2]</span>: [وصف المحتوى]
+- <span class="hi2">[component 3]</span>: [وصف المحتوى]
+
+<span class="cm"># 5️⃣ USER ACTIONS</span>
+User can: <span class="hi3">[action 1]</span>, <span class="hi3">[action 2]</span>, <span class="hi3">[action 3]</span>.
+
+<span class="cm"># 6️⃣ DEVICE & LAYOUT</span>
+Device: iPhone 15 Pro / 390x844px.
+Status bar: visible. Bottom nav: <span class="hi">[yes/no]</span>.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">📱</div> أمثلة Prompts جاهزة لشاشات شائعة</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>مثال 1 — Login Screen</span>
+        <span class="tool-badge badge-readdy">readdy.ai</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Login Screen</div>
+        <pre>E-commerce mobile app for fashion. Modern minimal style.
+Primary: #1A1A2E. Background: #FFFFFF.
+Font: Poppins. Radius: 12px.
+
+Screen: Login.
+Purpose: User signs in with email & password.
+
+Include:
+- App logo centered at top
+- "Welcome Back" heading + subtitle
+- Email input field with icon
+- Password input field with show/hide toggle
+- "Forgot password?" link (right aligned)
+- Primary CTA button "Sign In" (full width)
+- Divider "or continue with"
+- Social login row: Google + Apple buttons
+- "Don't have account? Register" at bottom
+
+User can: sign in, reset password, use social login, navigate to register.
+Device: iPhone 15 Pro. Status bar visible. No bottom nav.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>مثال 2 — Home / Feed Screen</span>
+        <span class="tool-badge badge-readdy">readdy.ai</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Home Feed Screen</div>
+        <pre>E-commerce mobile app for fashion. Modern minimal style.
+Primary: #1A1A2E. Background: #F8F8F8. Surface: #FFFFFF.
+Font: Poppins. Radius: 12px.
+
+Screen: Home Feed.
+Purpose: Main discovery screen with featured products and categories.
+
+Include:
+- Header: user avatar (left) + app name (center) + cart icon with badge (right)
+- Search bar below header
+- Horizontal categories scroll: All, Men, Women, Kids, Sale
+- Featured Banner: large card with promotional image + text overlay + CTA
+- Section "New Arrivals" with see all link
+- Product grid: 2 columns, each card has: product image, brand name, product name, price, heart icon
+- Bottom navigation: Home (active), Search, Wishlist, Cart, Profile
+
+User can: search, filter by category, view product, add to wishlist, go to cart.
+Device: iPhone 15 Pro. Status bar visible. Bottom nav visible.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>مثال 3 — Empty State / Error State</span>
+        <span class="tool-badge badge-readdy">readdy.ai</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Empty State</div>
+        <pre>Same app style as before.
+
+Screen: Empty Wishlist State.
+Purpose: Shown when user has no saved items yet.
+
+Include:
+- Centered illustration (minimal, line art style, heart/bookmark theme)
+- Heading: "Your wishlist is empty"
+- Subtext: "Save your favorite items to find them easily later"
+- CTA button: "Start Exploring" (primary style)
+- Keep bottom navigation visible
+
+Friendly and encouraging tone. Not sad or negative.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🔄</div> الـ Iteration Loop مع readdy</div>
+
+    <ul class="steps">
+      <li>
+        <div class="step-num" style="background:var(--phase4)">1</div>
+        <div class="step-content">
+          <strong>Generate الشاشة</strong>
+          <span>استخدم الـ full prompt template — مش prompt قصير</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase4)">2</div>
+        <div class="step-content">
+          <strong>قيّم النتيجة بالـ criteria دول</strong>
+          <span>Hierarchy واضحة؟ Colors consistent؟ Spacing منتظم؟ المحتوى صح؟</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase4)">3</div>
+        <div class="step-content">
+          <strong>Refine بـ follow-up prompt</strong>
+          <span>"Make the CTA button bigger" / "Add more spacing between sections" / "Change header style"</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase4)">4</div>
+        <div class="step-content">
+          <strong>Export وادخل Figma</strong>
+          <span>استخدم الـ output كـ reference — مش final design</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase4)">5</div>
+        <div class="step-content">
+          <strong>Rebuild في Figma بـ Components</strong>
+          <span>الـ readdy output مجرد direction — الـ Figma file هو الـ source of truth</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">⚡</div> Prompts لحالات خاصة</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>لو النتيجة مش عاجباك</span>
+        <span class="tool-badge badge-readdy">readdy.ai</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Refinement Prompts</div>
+        <pre><span class="cm"># لو الـ hierarchy مش واضحة</span>
+Redesign with stronger visual hierarchy.
+Make the primary action more prominent.
+Use size and weight contrast more aggressively.
+
+<span class="cm">---</span>
+
+<span class="cm"># لو الـ spacing مش كويس</span>
+Increase white space. 
+Add more breathing room between sections.
+Use consistent 16px padding throughout.
+
+<span class="cm">---</span>
+
+<span class="cm"># لو عايز تشوف dark mode</span>
+Convert this design to dark mode.
+Dark background: #121212, Surface: #1E1E1E.
+Keep same layout and components.
+
+<span class="cm">---</span>
+
+<span class="cm"># لو عايز variation</span>
+Show an alternative layout for the same screen.
+More card-based approach.
+Keep same color palette and style.</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase-divider"><span>Phase 5</span></div>
+
+<!-- ════════════════════════════════════════
+     PHASE 5 — FIGMA & HANDOFF
+════════════════════════════════════════ -->
+<div class="phase p5-col" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num">05</div>
+    <div class="phase-meta">
+      <div class="phase-label">Phase 5 — التسليم</div>
+      <div class="phase-title">Figma Cleanup & Developer Handoff</div>
+      <div class="phase-desc">التصميم مش خلص لما خلصت الشاشات — خلص لما الـ developer يقدر يشتغل من غير ما يسألك</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">🧹</div> Pre-Handoff Cleanup بمساعدة Claude</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Figma Audit Checklist</div>
+        <pre>أنا خلصت تصميم التطبيق وعايز أسلّمه للـ Flutter developers.
+اعملي Figma audit checklist شامل لازم أراجعه قبل الـ handoff.
+
+المشروع فيه:
+- [X] شاشة
+- Design System مع Variables
+- Components library
+- Prototype flows
+
+الـ Checklist لازم يشمل:
+<span class="hi">1. Design System</span> — كل الـ variables متربطة؟
+<span class="hi">2. Layers</span> — كل الـ layers مسماة صح؟
+<span class="hi">3. Components</span> — كل الـ components محولة Figma Components مش groups؟
+<span class="hi">4. Auto Layout</span> — مستخدم في كل الـ frames؟
+<span class="hi">5. Assets</span> — الـ icons والصور exported صح؟
+<span class="hi">6. Annotations</span> — الـ dev notes موجودة؟
+<span class="hi">7. Prototype</span> — كل الـ flows متربطة؟</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">📝</div> Figma Dev Mode Annotations</div>
+    <p>في كل component مهم، اكتب note للـ developer في Dev Mode:</p>
+
+    <div class="compare">
+      <div class="cmp-col cmp-bad">
+        <div class="cmp-head">❌ بدون annotation</div>
+        <pre>// الـ developer بيشوف:
+- كارت فيه صورة ونص
+- مش عارف:
+  * الـ API endpoint
+  * الـ navigation action
+  * الـ loading state شكله إيه
+  * الـ empty state فين</pre>
+      </div>
+      <div class="cmp-col cmp-good">
+        <div class="cmp-head">✅ مع annotation</div>
+        <pre>Widget: ProductCard
+States: default | loading | error
+Data: GET /products/{id}
+On tap: navigate → product/detail
+Image: NetworkImage (show skeleton)
+Empty: show placeholder_image
+Price: format as currency</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">📦</div> Handoff Checklist النهائي</div>
+    <div class="card" style="padding:0; overflow:hidden;">
+      <ul class="checklist">
+        <li class="cat-row">🎨 Design System</li>
+        <li><div class="cbox"></div> Figma Variables معمولة (Colors, Typography, Spacing, Radius)</li>
+        <li><div class="cbox"></div> كل الـ text styles محددة وـ Auto-applied</li>
+        <li><div class="cbox"></div> مفيش hardcoded colors في أي screen</li>
+
+        <li class="cat-row">🏷️ Naming & Structure</li>
+        <li><div class="cbox"></div> الـ Figma file فيه 4 pages: Design System / Components / Screens / Flows</li>
+        <li><div class="cbox"></div> كل الـ Screens مسماة بـ snake_case: <code>auth/login</code>, <code>home/feed</code></li>
+        <li><div class="cbox"></div> كل الـ Layers مسماة (مفيش Frame 892)</li>
+        <li><div class="cbox"></div> كل الـ Components Figma Components (مش Groups)</li>
+
+        <li class="cat-row">📐 Layout</li>
+        <li><div class="cbox"></div> Auto Layout مستخدم في كل الـ frames</li>
+        <li><div class="cbox"></div> مفيش absolute positioning (غير للعناصر الـ overlay)</li>
+        <li><div class="cbox"></div> الـ spacing من الـ Variables (مش hardcoded)</li>
+
+        <li class="cat-row">🧩 Components</li>
+        <li><div class="cbox"></div> كل Component عنده Variants: default, hover, disabled, loading, error</li>
+        <li><div class="cbox"></div> الـ Component Properties موثّقة (text, icon, isEnabled)</li>
+        <li><div class="cbox"></div> Empty states مصمّمة لكل list/feed</li>
+        <li><div class="cbox"></div> Error states مصمّمة لكل form/request</li>
+
+        <li class="cat-row">📝 Dev Annotations</li>
+        <li><div class="cbox"></div> كل شاشة عندها وصف وظيفتها</li>
+        <li><div class="cbox"></div> الـ interactive elements فيها navigation annotation</li>
+        <li><div class="cbox"></div> الـ API-dependent components فيها endpoint reference</li>
+
+        <li class="cat-row">🖼️ Assets</li>
+        <li><div class="cbox"></div> الـ Icons exported كـ SVG</li>
+        <li><div class="cbox"></div> الـ Images placeholders واضحة</li>
+        <li><div class="cbox"></div> الـ App Icon في كل المقاسات</li>
+
+        <li class="cat-row">🔗 Prototype</li>
+        <li><div class="cbox"></div> كل الـ User Flows متربطة في Prototype</li>
+        <li><div class="cbox"></div> الـ Navigation actions موضحة</li>
+        <li><div class="cbox"></div> Shareable Prototype link جاهز</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="icon">📄</div> Handoff Document — اطلب Claude يكتبه</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Prompt</span>
+        <span class="tool-badge badge-claude">Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Design Handoff Document</div>
+        <pre>اكتبلي Design Handoff Document للـ Flutter developers.
+المشروع: [اسم المشروع]
+الشاشات: [عدد الشاشات]
+الـ Figma Link: [link]
+
+الـ document لازم يشمل:
+<span class="hi">1. Design Overview</span>
+   - الـ Design System summary
+   - Color palette مع الـ HEX codes
+   - Typography scale
+   - Spacing system
+
+<span class="hi">2. Screen Inventory</span>
+   - جدول بكل الشاشات مع الـ Figma frame link
+
+<span class="hi">3. Component Library</span>
+   - قائمة بكل الـ components
+   - الـ variants والـ states لكل واحد
+
+<span class="hi">4. Interaction Notes</span>
+   - الـ transitions المطلوبة
+   - الـ animations
+
+<span class="hi">5. Assets</span>
+   - رابط مجلد الـ assets
+   - naming convention
+
+<span class="hi">6. Questions & Clarifications</span>
+   - أي حاجة الـ developer يسأل عنها، إجابتها هنا</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     SUMMARY TABLE
+════════════════════════════════════════ -->
+<div style="margin-top:72px;">
+  <div style="font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--ink3); margin-bottom:16px;">الملخص الكامل</div>
+  <table class="map-table">
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>المهمة</th>
+        <th>الـ Tool</th>
+        <th>الـ Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag-inline t-orange">01</span> تحليل</td>
+        <td>قرا الـ BRD/SRS واستخرج الـ screens</td>
+        <td><span class="tag-inline t-blue">Claude</span></td>
+        <td>Screen list + User flows + Frame names</td>
+      </tr>
+      <tr>
+        <td><span class="tag-inline t-orange">02</span> Research</td>
+        <td>حدد الـ visual direction</td>
+        <td><span class="tag-inline t-blue">Claude</span> <span class="tag-inline t-orange">readdy</span></td>
+        <td>Color palette + Typography + Moodboard</td>
+      </tr>
+      <tr>
+        <td><span class="tag-inline t-blue">03</span> Design System</td>
+        <td>ابني الـ Variables والـ Components</td>
+        <td><span class="tag-inline t-green">Figma</span></td>
+        <td>Design System جاهز للـ use</td>
+      </tr>
+      <tr>
+        <td><span class="tag-inline t-purple">04</span> Screens</td>
+        <td>صمم الشاشات بـ AI</td>
+        <td><span class="tag-inline t-orange">readdy</span> <span class="tag-inline t-green">Figma</span></td>
+        <td>كل الشاشات كاملة</td>
+      </tr>
+      <tr>
+        <td><span class="tag-inline t-green">05</span> Handoff</td>
+        <td>نظّف وسلّم للـ developers</td>
+        <td><span class="tag-inline t-green">Figma</span> <span class="tag-inline t-blue">Claude</span></td>
+        <td>Production-ready Figma file</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div style="text-align:center; margin-top:64px; padding-top:32px; border-top:2px solid var(--border); color:var(--ink3); font-size:13px;">
+  UI Designer AI Workflow Guide | readdy.ai + Claude + Figma<br>
+  <span style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px;">الـ AI بس بيكمّل تفكيرك — مش بيحل محله</span>
+</div>
+
+</div><!-- /main -->
+
+<button class="print-btn" onclick="window.print()">🖨️ طباعة / PDF</button>
+
+<script>
+// Highlight active nav item on scroll
+const phases = document.querySelectorAll('.phase');
+const jSteps = document.querySelectorAll('.j-step');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      jSteps.forEach(s => s.classList.remove('active'));
+      const id = e.target.id;
+      const num = id.replace('phase','');
+      const active = document.querySelector(`.j-step.p${num}`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+phases.forEach(p => obs.observe(p));
+</script>
+</body>
+</html>
