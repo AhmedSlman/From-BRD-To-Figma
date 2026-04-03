@@ -415,6 +415,7 @@ code {
     <a class="j-step p3" href="#phase3"><span class="j-num">3</span> Design System</a>
     <a class="j-step p4" href="#phase4"><span class="j-num">4</span> الشاشات بـ readdy</a>
     <a class="j-step p5" href="#phase5"><span class="j-num">5</span> Figma & Handoff</a>
+    <a class="j-step" href="#phase6" style="--c:#e11d48;" onmouseover="this.style.color='#e11d48';this.style.borderBottomColor='#e11d48'" onmouseout="this.style.color='';this.style.borderBottomColor='transparent'"><span class="j-num" style="border-color:#e11d48;color:#e11d48;">6</span> Behance</a>
   </div>
 </nav>
 
@@ -843,128 +844,184 @@ Categories:
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="icon">📐</div> قاعدة الـ Prompt الكامل في readdy</div>
-    <p>كل prompt في readdy لازم يشمل الـ 6 عناصر دول:</p>
+    <div class="card-title"><div class="icon">📐</div> قاعدة الـ Prompt الكامل في readdy — Multi-Screen</div>
+    <p>مش هتديه شاشة بشاشة — هتديه <strong>مجموعة شاشات مترابطة في prompt واحد</strong> عشان يفهم الـ visual consistency ويطلع نتيجة أفضل:</p>
 
     <div class="prompt-wrap">
       <div class="prompt-label">
-        <span>Template الأساسي</span>
+        <span>Template الأساسي — Multi-Screen</span>
         <span class="tool-badge badge-readdy">readdy.ai</span>
       </div>
       <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Readdy Full Prompt Template</div>
-        <pre><span class="cm"># 1️⃣ APP CONTEXT</span>
-<span class="hi">[App Type]</span> mobile app. [وصف جملة واحدة].
-Target: <span class="hi">[audience]</span>.
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Readdy Multi-Screen Prompt Template</div>
+        <pre><span class="cm"># ═══ APP CONTEXT (مرة واحدة للكل) ═══</span>
+<span class="hi">[App Type]</span> mobile app — <span class="hi">[وصف جملة واحدة]</span>.
+Target users: <span class="hi">[audience]</span>.
 
-<span class="cm"># 2️⃣ VISUAL STYLE</span>
-Style: <span class="hi">[الـ style اللي اخترته]</span>.
-Primary color: <span class="hi">[HEX]</span>.
-Background: <span class="hi">[HEX]</span>.
-Font: <span class="hi">[Font Name]</span>.
-Corner radius: <span class="hi">[Xpx]</span>.
+<span class="cm"># ═══ DESIGN SYSTEM (ثابت في كل prompt) ═══</span>
+Style: <span class="hi">[style]</span>. Primary: <span class="hi">[HEX]</span>. Background: <span class="hi">[HEX]</span>.
+Surface: <span class="hi">[HEX]</span>. Font: <span class="hi">[Font]</span>. Corner radius: <span class="hi">[Xpx]</span>.
+Icons: outlined. Spacing: 16px base grid.
 
-<span class="cm"># 3️⃣ SCREEN NAME & PURPOSE</span>
-Screen: <span class="hi">[اسم الشاشة]</span>.
-Purpose: <span class="hi">[وظيفتها في جملة]</span>.
+<span class="cm"># ═══ SCREENS — كلهم في نفس الـ prompt ═══</span>
+<span class="hi">Design these [N] screens side by side in one frame:</span>
 
-<span class="cm"># 4️⃣ CONTENT & COMPONENTS</span>
-Include:
-- <span class="hi2">[component 1]</span>: [وصف المحتوى]
-- <span class="hi2">[component 2]</span>: [وصف المحتوى]
-- <span class="hi2">[component 3]</span>: [وصف المحتوى]
+<span class="hi2">Screen 1 — [اسم الشاشة]</span>
+Purpose: [وظيفتها]
+Components: [list]
+User actions: [actions]
 
-<span class="cm"># 5️⃣ USER ACTIONS</span>
-User can: <span class="hi3">[action 1]</span>, <span class="hi3">[action 2]</span>, <span class="hi3">[action 3]</span>.
+<span class="hi2">Screen 2 — [اسم الشاشة]</span>
+Purpose: [وظيفتها]
+Components: [list]
+User actions: [actions]
 
-<span class="cm"># 6️⃣ DEVICE & LAYOUT</span>
-Device: iPhone 15 Pro / 390x844px.
-Status bar: visible. Bottom nav: <span class="hi">[yes/no]</span>.</pre>
+<span class="hi2">Screen 3 — [اسم الشاشة]</span>
+Purpose: [وظيفتها]
+Components: [list]
+User actions: [actions]
+
+<span class="cm"># ═══ LAYOUT ═══</span>
+Device: iPhone 15 Pro / 390x844px each screen.
+Arrange: horizontally side by side with 32px gap.
+Consistent header and bottom nav across all screens.</pre>
       </div>
+    </div>
+
+    <div class="info-box">
+      <strong>القاعدة:</strong> قسّم الشاشات في <strong>groups منطقية</strong> مش screens فردية — مثلاً: Auth Flow (3 شاشات)، Onboarding (3 شاشات)، Home + Search + Filter (3 شاشات). كل group في prompt واحد.
     </div>
   </div>
 
   <div class="card">
-    <div class="card-title"><div class="icon">📱</div> أمثلة Prompts جاهزة لشاشات شائعة</div>
+    <div class="card-title"><div class="icon">📱</div> أمثلة Multi-Screen Prompts جاهزة</div>
 
     <div class="prompt-wrap">
       <div class="prompt-label">
-        <span>مثال 1 — Login Screen</span>
+        <span>Group 1 — Auth Flow (3 شاشات)</span>
         <span class="tool-badge badge-readdy">readdy.ai</span>
       </div>
       <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Login Screen</div>
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Auth Flow — 3 Screens</div>
         <pre>E-commerce mobile app for fashion. Modern minimal style.
-Primary: #1A1A2E. Background: #FFFFFF.
-Font: Poppins. Radius: 12px.
+Primary: #1A1A2E. Background: #FFFFFF. Surface: #F8F8F8.
+Font: Poppins. Radius: 12px. Icons: outlined.
 
-Screen: Login.
-Purpose: User signs in with email & password.
+Design these 3 screens side by side in one frame:
 
-Include:
-- App logo centered at top
-- "Welcome Back" heading + subtitle
-- Email input field with icon
-- Password input field with show/hide toggle
-- "Forgot password?" link (right aligned)
-- Primary CTA button "Sign In" (full width)
-- Divider "or continue with"
-- Social login row: Google + Apple buttons
-- "Don't have account? Register" at bottom
+<span class="hi2">Screen 1 — Splash / Onboarding</span>
+Purpose: First impression, app value proposition.
+Components:
+- Full-screen gradient background with brand color
+- App logo centered
+- Tagline text below logo
+- "Get Started" CTA button (full width)
+- "Already have account? Login" text link
 
-User can: sign in, reset password, use social login, navigate to register.
-Device: iPhone 15 Pro. Status bar visible. No bottom nav.</pre>
+<span class="hi2">Screen 2 — Login</span>
+Purpose: Returning user signs in.
+Components:
+- "Welcome Back" H1 + subtitle
+- Email input with icon
+- Password input with show/hide toggle
+- "Forgot password?" right-aligned link
+- "Sign In" primary button (full width)
+- Divider "or" + Google/Apple social buttons
+- "New here? Create account" at bottom
+
+<span class="hi2">Screen 3 — Register</span>
+Purpose: New user creates account.
+Components:
+- "Create Account" H1 + subtitle
+- Name, Email, Password inputs
+- "Confirm Password" input
+- Terms checkbox + link
+- "Create Account" primary button
+- "Already have account? Login" link
+
+Device: iPhone 15 Pro / 390x844px each.
+Arrange horizontally with 40px gap. No bottom nav on auth screens.</pre>
       </div>
     </div>
 
     <div class="prompt-wrap">
       <div class="prompt-label">
-        <span>مثال 2 — Home / Feed Screen</span>
+        <span>Group 2 — Core App Screens (4 شاشات)</span>
         <span class="tool-badge badge-readdy">readdy.ai</span>
       </div>
       <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Home Feed Screen</div>
-        <pre>E-commerce mobile app for fashion. Modern minimal style.
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Core Screens — 4 Screens</div>
+        <pre>Same app: E-commerce fashion. Same design system as before.
 Primary: #1A1A2E. Background: #F8F8F8. Surface: #FFFFFF.
 Font: Poppins. Radius: 12px.
 
-Screen: Home Feed.
-Purpose: Main discovery screen with featured products and categories.
+Design these 4 screens side by side:
 
-Include:
-- Header: user avatar (left) + app name (center) + cart icon with badge (right)
-- Search bar below header
-- Horizontal categories scroll: All, Men, Women, Kids, Sale
-- Featured Banner: large card with promotional image + text overlay + CTA
-- Section "New Arrivals" with see all link
-- Product grid: 2 columns, each card has: product image, brand name, product name, price, heart icon
-- Bottom navigation: Home (active), Search, Wishlist, Cart, Profile
+<span class="hi2">Screen 1 — Home</span>
+Header: avatar + app logo + cart badge icon.
+Search bar. Horizontal category chips (All/Men/Women/Kids/Sale).
+Hero banner (promo image + text + CTA). 
+"New Arrivals" section title + 2-column product grid.
+Bottom nav: Home(active), Search, Wishlist, Cart, Profile.
 
-User can: search, filter by category, view product, add to wishlist, go to cart.
-Device: iPhone 15 Pro. Status bar visible. Bottom nav visible.</pre>
+<span class="hi2">Screen 2 — Product Detail</span>
+Product image (full width, scrollable gallery dots).
+Product name, brand, price, rating + review count.
+Color selector row. Size selector row.
+Description (2 lines + "read more").
+"Add to Cart" primary button + "Wishlist" icon button.
+Bottom nav visible.
+
+<span class="hi2">Screen 3 — Cart</span>
+"My Cart (3 items)" header with back arrow.
+List of cart items: thumbnail + name + size + price + qty stepper + remove.
+Summary card: Subtotal, Shipping, Total.
+"Proceed to Checkout" primary button.
+Bottom nav visible.
+
+<span class="hi2">Screen 4 — Profile</span>
+User avatar + name + email at top.
+Menu list: Orders, Wishlist, Addresses, Payment Methods, Settings, Logout.
+Bottom nav visible with Profile active.
+
+Device: iPhone 15 Pro. Horizontal layout with 40px gap.</pre>
       </div>
     </div>
 
     <div class="prompt-wrap">
       <div class="prompt-label">
-        <span>مثال 3 — Empty State / Error State</span>
+        <span>Group 3 — States & Edge Cases (3 شاشات)</span>
         <span class="tool-badge badge-readdy">readdy.ai</span>
       </div>
       <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Empty State</div>
-        <pre>Same app style as before.
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> States — 3 Screens</div>
+        <pre>Same app and design system.
 
-Screen: Empty Wishlist State.
-Purpose: Shown when user has no saved items yet.
+Design these 3 screens side by side:
 
-Include:
-- Centered illustration (minimal, line art style, heart/bookmark theme)
-- Heading: "Your wishlist is empty"
-- Subtext: "Save your favorite items to find them easily later"
-- CTA button: "Start Exploring" (primary style)
-- Keep bottom navigation visible
+<span class="hi2">Screen 1 — Empty Wishlist</span>
+Centered illustration (minimal line-art, heart theme).
+"Your wishlist is empty" heading.
+"Start exploring and save your favorites" subtitle.
+"Explore Now" CTA button.
+Bottom nav visible, Wishlist tab active.
 
-Friendly and encouraging tone. Not sad or negative.</pre>
+<span class="hi2">Screen 2 — Search Results (no results)</span>
+Search bar at top with "sneakers" typed.
+"No results found" centered illustration.
+"Try different keywords" message.
+Suggested popular searches as chips below.
+Bottom nav visible.
+
+<span class="hi2">Screen 3 — Order Success</span>
+Centered green checkmark animation frame.
+"Order Placed!" heading.
+Order number + estimated delivery date.
+"Track Order" outlined button.
+"Continue Shopping" primary button.
+No bottom nav (modal-style full screen).
+
+Device: iPhone 15 Pro. Horizontal layout with 40px gap.</pre>
       </div>
     </div>
   </div>
@@ -1213,6 +1270,238 @@ Price: format as currency</pre>
   </div>
 </div>
 
+<div class="phase-divider"><span>Phase 6</span></div>
+
+<!-- ════════════════════════════════════════
+     PHASE 6 — BEHANCE PRESENTATION
+════════════════════════════════════════ -->
+<div class="phase" id="phase6" style="--phase-color:#e11d48;">
+  <div class="phase-header">
+    <div class="phase-num" style="background:linear-gradient(135deg,#e11d48,#9f1239);">06</div>
+    <div class="phase-meta">
+      <div class="phase-label" style="color:#e11d48;">Phase 6 — عرض الشغل</div>
+      <div class="phase-title">Behance Presentation جوّا Figma بـ Claude MCP</div>
+      <div class="phase-desc">Claude متوصّل بـ Figma مباشرة — بيقرأ تصميمك ويبني الـ Behance presentation كـ Figma frames حقيقية من غير ما تعمل أي حاجة يدوياً</div>
+    </div>
+  </div>
+
+  <div class="info-box" style="background:rgba(225,29,72,0.07); border-color:rgba(225,29,72,0.2); border-right-color:#e11d48;">
+    <strong>ليه ده أحسن؟</strong> مش هتعمل screenshots ومش هتاخد HTML وتفوّته — Claude بيدخل على الـ Figma file بتاعك مباشرة، بيقرأ كل شاشاتك وألوانك وـ Design System، ويبني الـ Behance case study كـ <strong>Figma page جديدة</strong> جنب تصميمك. إنت بس بتعمل Export وتحمّله على Behance.
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="card">
+    <div class="card-title"><div class="icon">⚙️</div> إزاي الموضوع بيشتغل — Claude + Figma MCP</div>
+
+    <table class="map-table">
+      <thead><tr><th>الخطوة</th><th>Claude بيعمل إيه</th><th>الـ Tool</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1 — يقرأ التصميم</td>
+          <td><code>get_design_context</code> — بيشوف كل الـ frames والألوان والـ components</td>
+          <td><span class="tag-inline t-purple">Figma MCP</span></td>
+        </tr>
+        <tr>
+          <td>2 — يفهم الـ Design System</td>
+          <td><code>search_design_system</code> — بيجيب الـ variables والـ typography</td>
+          <td><span class="tag-inline t-purple">Figma MCP</span></td>
+        </tr>
+        <tr>
+          <td>3 — يبني الـ Presentation</td>
+          <td><code>use_figma</code> — بيكتب JavaScript يعمل frames وـ layouts وـ text جوّا Figma</td>
+          <td><span class="tag-inline t-purple">Figma MCP</span></td>
+        </tr>
+        <tr>
+          <td>4 — إنت بس تعمل Export</td>
+          <td>اختار الـ Behance page → Export as PNG → Upload على Behance</td>
+          <td><span class="tag-inline t-green">Figma</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MAIN PROMPT -->
+  <div class="card">
+    <div class="card-title"><div class="icon">🎨</div> Main Prompt — Claude builds the Behance in Figma</div>
+    <p>Open Claude, make sure the Figma connector is connected, and send this prompt with your Figma file link:</p>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>Main Prompt</span>
+        <span class="tool-badge badge-claude">Claude + Figma MCP</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Behance Presentation — Figma MCP</div>
+        <pre><span class="cm"># Paste your Figma file link here</span>
+Figma file: <span class="hi">[YOUR FIGMA FILE URL]</span>
+
+I'm a UI designer and I just finished designing an app called <span class="hi">[APP NAME]</span>.
+I want you to build a Behance case study presentation as a new Figma page inside the same file.
+
+<span class="hi">Steps:</span>
+1. Open the Figma file and read all existing screens
+2. Extract: primary colors, fonts, and the 4–6 most important screens
+3. Create a new page named "Behance Presentation"
+4. Build these sections as Figma frames at 1440px width:
+
+<span class="hi2">Frame 1 — HERO COVER (1440×810px)</span>
+- Background using the primary color from the design system
+- App name in large bold type (use the project's heading font)
+- Short tagline below the name
+- Placeholder area for a phone mockup (labeled clearly)
+- Designer name in the bottom corner
+
+<span class="hi2">Frame 2 — PROJECT OVERVIEW (1440×600px)</span>
+- App name + 2–3 sentence project description
+- 3 info cards side by side: Role | Tools | Year
+- Clean card-style layout
+
+<span class="hi2">Frame 3 — DESIGN SYSTEM (1440×700px)</span>
+- Color palette: each color in a labeled swatch with its HEX code
+- Typography scale: font name + H1 / H2 / Body / Caption samples
+- Corner radius and spacing tokens (if found in the file)
+
+<span class="hi2">Frame 4 — SCREENS SHOWCASE (1440×1200px)</span>
+- Display 4–6 of the key screens
+- Each screen inside a simple rounded-rectangle phone frame
+- Screen name label below each one
+- Dark background so the screens stand out
+
+<span class="hi2">Frame 5 — KEY FEATURES (1440×700px)</span>
+- 3 or 4 standout features of the app
+- Each feature: icon (emoji or simple shape) + title + one-line description
+- Equal-width horizontal layout
+
+<span class="hi2">Frame 6 — CLOSING (1440×500px)</span>
+- "Thank You" or a short closing line
+- Designer name
+- "Made with Figma" badge
+
+<span class="hi">Rules:</span>
+- Use the same fonts and colors from the project's design system — no hardcoded values
+- Apply Auto Layout to every frame
+- Consistent padding: 48px on all sides
+- Clear layer names: behance/hero, behance/overview, behance/design-system, etc.</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITERATION PROMPTS -->
+  <div class="card">
+    <div class="card-title"><div class="icon">🔁</div> Iteration & Refinement Prompts</div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>When you want to refine a section</span>
+        <span class="tool-badge badge-claude">Claude + Figma MCP</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Refinement Prompts</div>
+        <pre><span class="cm"># Update the Hero frame</span>
+In the "Behance Presentation" page, update the Hero frame:
+Change the background to a gradient from [HEX1] to [HEX2] instead of solid.
+Increase the app name font size to 96px.
+
+<span class="cm">---</span>
+
+<span class="cm"># Add a new section</span>
+Add a new frame after Key Features:
+"USER JOURNEY" — build a simple flowchart using Figma shapes
+showing the user's path: Onboarding → Login → Home → Product → Checkout
+
+<span class="cm">---</span>
+
+<span class="cm"># Create a dark version</span>
+Create a dark mode version of the HERO frame:
+Background: #0A0A0A, text: #FFFFFF, accent: same primary color as the design.
+Save it as a separate frame named "behance/hero-dark"
+
+<span class="cm">---</span>
+
+<span class="cm"># Audit and fix</span>
+Review all frames in the "Behance Presentation" page.
+Identify any spacing issues or unreadable text.
+Then fix them directly in Figma.</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKFLOW STEPS -->
+  <div class="card">
+    <div class="card-title"><div class="icon">🔄</div> Full Workflow — Step by Step</div>
+    <ul class="steps">
+      <li>
+        <div class="step-num" style="background:#e11d48;">1</div>
+        <div class="step-content">
+          <strong>Connect Claude to Figma</strong>
+          <span>Claude.ai → Settings → Connectors → Figma → Connect. Then open a new chat.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:#e11d48;">2</div>
+        <div class="step-content">
+          <strong>Send the prompt with your Figma link</strong>
+          <span>Claude will open the file, read all screens, colors, and Design System automatically.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:#e11d48;">3</div>
+        <div class="step-content">
+          <strong>Claude builds the Presentation</strong>
+          <span>It creates a new "Behance Presentation" page with all frames directly inside your Figma file.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:#e11d48;">4</div>
+        <div class="step-content">
+          <strong>Review and iterate</strong>
+          <span>Open Figma to check the result. Send a follow-up prompt for any changes — Claude edits directly.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:#e11d48;">5</div>
+        <div class="step-content">
+          <strong>Export from Figma</strong>
+          <span>Select all frames in the Behance page → Export as PNG 2x (or 1x if file size is too large).</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:#e11d48;">6</div>
+        <div class="step-content">
+          <strong>Upload to Behance</strong>
+          <span>New Project → Upload PNGs in order → Title + Description + Tags → Publish.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="card">
+    <div class="card-title"><div class="icon">✅</div> Behance Upload Checklist</div>
+    <div style="overflow:hidden; border-radius:8px; border:1px solid var(--border);">
+      <ul class="checklist">
+        <li class="cat-row">🖼️ Figma Frames</li>
+        <li><div class="cbox"></div> Every frame is 1440px wide (Behance standard)</li>
+        <li><div class="cbox"></div> Order is correct: Cover → Overview → DS → Screens → Features → Closing</li>
+        <li><div class="cbox"></div> Colors and fonts come from the Design System — no hardcoded values</li>
+        <li><div class="cbox"></div> Layer names are clear: <code>behance/hero</code>, <code>behance/screens</code></li>
+
+        <li class="cat-row">📤 Export</li>
+        <li><div class="cbox"></div> PNG 2x — no frame smaller than 1440×600px</li>
+        <li><div class="cbox"></div> No frame has clipped text or overflow</li>
+        <li><div class="cbox"></div> Files named in order: 01-cover, 02-overview, etc.</li>
+
+        <li class="cat-row">📝 Behance Project Info</li>
+        <li><div class="cbox"></div> Clear and distinct project title</li>
+        <li><div class="cbox"></div> Description: 2–3 sentences in English</li>
+        <li><div class="cbox"></div> Tags: UI, UX, Mobile App, Figma, [App Category]</li>
+        <li><div class="cbox"></div> Tools: Figma (required for Behance search visibility)</li>
+        <li><div class="cbox"></div> Cover Image: set to the Hero frame (the most striking one)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════
      SUMMARY TABLE
 ════════════════════════════════════════ -->
@@ -1258,16 +1547,20 @@ Price: format as currency</pre>
         <td><span class="tag-inline t-green">Figma</span> <span class="tag-inline t-blue">Claude</span></td>
         <td>Production-ready Figma file</td>
       </tr>
+      <tr>
+        <td><span class="tag-inline" style="background:rgba(225,29,72,0.12);color:#e11d48;border:1px solid rgba(225,29,72,0.3);">06</span> Behance</td>
+        <td>Claude يبني الـ presentation جوّا Figma مباشرة</td>
+        <td><span class="tag-inline t-blue">Claude</span> <span class="tag-inline t-purple">Figma MCP</span></td>
+        <td>Behance Figma Page جاهزة للـ Export</td>
+      </tr>
     </tbody>
   </table>
 </div>
 
 <!-- Footer -->
 <div style="text-align:center; margin-top:64px; padding-top:32px; border-top:2px solid var(--border); color:var(--ink3); font-size:13px;">
-  UI Designer AI Workflow Guide | readdy.ai + Claude + Figma<br>
+  UI Designer AI Workflow Guide | readdy.ai + Claude + Figma + Behance<br>
   <span style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px;">الـ AI بس بيكمّل تفكيرك — مش بيحل محله</span>
-    <span style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px;">By Ahmed Slman</span>
-
 </div>
 
 </div><!-- /main -->
