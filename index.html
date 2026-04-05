@@ -22,6 +22,7 @@
   --phase2: #eab308;
   --phase3: #3b82f6;
   --phase4: #a855f7;
+  --phase4b: #06b6d4;
   --phase5: #10b981;
 }
 
@@ -119,6 +120,7 @@ h1 span { -webkit-text-fill-color: var(--accent); color: var(--accent); }
 .j-step.p2:hover, .j-step.p2.active { border-bottom-color: var(--phase2); color: var(--phase2); }
 .j-step.p3:hover, .j-step.p3.active { border-bottom-color: var(--phase3); color: var(--phase3); }
 .j-step.p4:hover, .j-step.p4.active { border-bottom-color: var(--phase4); color: var(--phase4); }
+.j-step.p4b:hover, .j-step.p4b.active { border-bottom-color: var(--phase4b); color: var(--phase4b); }
 .j-step.p5:hover, .j-step.p5.active { border-bottom-color: var(--phase5); color: var(--phase5); }
 .j-num {
   width: 20px; height: 20px; border-radius: 50%;
@@ -152,6 +154,7 @@ h1 span { -webkit-text-fill-color: var(--accent); color: var(--accent); }
 .p2-col .phase-num { background: var(--phase2); }
 .p3-col .phase-num { background: var(--phase3); }
 .p4-col .phase-num { background: var(--phase4); }
+.p4b-col .phase-num { background: var(--phase4b); }
 .p5-col .phase-num { background: var(--phase5); }
 
 .phase-meta { flex: 1; }
@@ -163,6 +166,7 @@ h1 span { -webkit-text-fill-color: var(--accent); color: var(--accent); }
 .p2-col .phase-label { color: var(--phase2); }
 .p3-col .phase-label { color: var(--phase3); }
 .p4-col .phase-label { color: var(--phase4); }
+.p4b-col .phase-label { color: var(--phase4b); }
 .p5-col .phase-label { color: var(--phase5); }
 
 .phase-title { font-size: 26px; font-weight: 900; line-height: 1.2; margin-bottom: 6px; }
@@ -208,6 +212,7 @@ h1 span { -webkit-text-fill-color: var(--accent); color: var(--accent); }
 .badge-readdy { background: rgba(249,115,22,0.15); color: var(--phase1); border: 1px solid rgba(249,115,22,0.3); }
 .badge-claude { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.3); }
 .badge-figma { background: rgba(168,85,247,0.15); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.3); }
+.badge-figmamake { background: rgba(6,182,212,0.15); color: var(--phase4b); border: 1px solid rgba(6,182,212,0.3); }
 
 .prompt-box {
   background: #0d1117;
@@ -234,6 +239,7 @@ h1 span { -webkit-text-fill-color: var(--accent); color: var(--accent); }
 .hi { color: #f6a96a; }
 .hi2 { color: #7ab8e8; }
 .hi3 { color: #7ee787; }
+.hi4 { color: #06b6d4; }
 
 /* ═══ COMPARE ═══ */
 .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
@@ -333,6 +339,11 @@ code {
   border-color: rgba(0,212,255,0.2);
   border-right-color: var(--accent);
 }
+.info-box.cyan {
+  background: rgba(6,182,212,0.06);
+  border-color: rgba(6,182,212,0.2);
+  border-right-color: var(--phase4b);
+}
 .info-box strong { color: var(--ink); }
 
 /* ═══ TAG ═══ */
@@ -345,6 +356,7 @@ code {
 .t-blue { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.25); }
 .t-green { background: rgba(16,185,129,0.12); color: var(--success); border: 1px solid rgba(16,185,129,0.25); }
 .t-purple { background: rgba(168,85,247,0.12); color: var(--phase4); border: 1px solid rgba(168,85,247,0.25); }
+.t-cyan { background: rgba(6,182,212,0.12); color: var(--phase4b); border: 1px solid rgba(6,182,212,0.25); }
 
 /* ═══ DIVIDER ═══ */
 .phase-divider {
@@ -358,6 +370,68 @@ code {
   font-size: 11px; color: var(--ink3);
   letter-spacing: 2px; text-transform: uppercase;
 }
+
+/* ═══ VERSUS CARD ═══ */
+.vs-grid {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 0;
+  margin-bottom: 16px; align-items: stretch;
+}
+.vs-col {
+  border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.vs-col.readdy-col { border-color: rgba(249,115,22,0.3); }
+.vs-col.figmamake-col { border-color: rgba(6,182,212,0.3); }
+.vs-head {
+  padding: 12px 16px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.readdy-col .vs-head { background: rgba(249,115,22,0.1); color: var(--phase1); border-bottom-color: rgba(249,115,22,0.2); }
+.figmamake-col .vs-head { background: rgba(6,182,212,0.1); color: var(--phase4b); border-bottom-color: rgba(6,182,212,0.2); }
+.vs-body { padding: 16px; }
+.vs-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px; color: var(--ink2);
+}
+.vs-item:last-child { border-bottom: none; padding-bottom: 0; }
+.vs-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+.readdy-col .vs-dot { background: var(--phase1); }
+.figmamake-col .vs-dot { background: var(--phase4b); }
+.vs-sep {
+  display: flex; align-items: center; justify-content: center;
+  width: 48px; font-size: 13px; font-weight: 900;
+  color: var(--ink3); font-family: 'JetBrains Mono', monospace;
+}
+
+/* ═══ USE CASE CARD ═══ */
+.use-case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.uc-card {
+  border-radius: 10px; padding: 16px;
+  border: 1px solid var(--border);
+}
+.uc-card.uc-readdy { border-color: rgba(249,115,22,0.25); background: rgba(249,115,22,0.04); }
+.uc-card.uc-figmamake { border-color: rgba(6,182,212,0.25); background: rgba(6,182,212,0.04); }
+.uc-title {
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.uc-readdy .uc-title { color: var(--phase1); }
+.uc-figmamake .uc-title { color: var(--phase4b); }
+.uc-list { list-style: none; }
+.uc-list li {
+  font-size: 13px; color: var(--ink2);
+  padding: 5px 0; border-bottom: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 8px;
+}
+.uc-list li:last-child { border-bottom: none; }
+.uc-list li::before { content: '→'; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 2px; flex-shrink: 0; }
+.uc-readdy .uc-list li::before { color: var(--phase1); }
+.uc-figmamake .uc-list li::before { color: var(--phase4b); }
 
 /* ═══ PRINT ═══ */
 .print-btn {
@@ -380,7 +454,8 @@ code {
 @media(max-width:640px) {
   .main { padding: 0 20px 60px; }
   .hero { padding: 48px 20px 56px; }
-  .compare, .grid2 { grid-template-columns: 1fr; }
+  .compare, .grid2, .vs-grid, .use-case-grid { grid-template-columns: 1fr; }
+  .vs-sep { display: none; }
   .journey { padding: 0 20px; }
 }
 @media print {
@@ -399,9 +474,10 @@ code {
     <p class="hero-sub">دليل عملي خطوة بخطوة للـ UI Designer — من أول ما تستلم ملفات المشروع لحد ما تسلّم التصميم للـ developers بشكل production-ready</p>
     <div class="hero-chips">
       <span class="chip">readdy.ai</span>
+      <span class="chip">Figma Make</span>
       <span class="chip">Claude / ChatGPT</span>
       <span class="chip">Figma</span>
-      <span class="chip">5 Phases</span>
+      <span class="chip">6 Phases</span>
       <span class="chip">Prompts جاهزة</span>
     </div>
   </div>
@@ -414,6 +490,7 @@ code {
     <a class="j-step p2" href="#phase2"><span class="j-num">2</span> Research & Moodboard</a>
     <a class="j-step p3" href="#phase3"><span class="j-num">3</span> Design System</a>
     <a class="j-step p4" href="#phase4"><span class="j-num">4</span> الشاشات بـ readdy</a>
+    <a class="j-step p4b" href="#phase4b"><span class="j-num">4B</span> Figma Make</a>
     <a class="j-step p5" href="#phase5"><span class="j-num">5</span> Figma & Handoff</a>
     <a class="j-step" href="#phase6" style="--c:#e11d48;" onmouseover="this.style.color='#e11d48';this.style.borderBottomColor='#e11d48'" onmouseout="this.style.color='';this.style.borderBottomColor='transparent'"><span class="j-num" style="border-color:#e11d48;color:#e11d48;">6</span> Behance</a>
   </div>
@@ -423,7 +500,7 @@ code {
 <div class="main">
 
 <!-- ════════════════════════════════════════
-     PHASE 1 — تحليل الـ DOCS
+     PHASE 1
 ════════════════════════════════════════ -->
 <div class="phase p1-col" id="phase1">
   <div class="phase-header">
@@ -442,7 +519,6 @@ code {
   <div class="card">
     <div class="card-title"><div class="icon">🧠</div> الخطوة الأولى — اسأل Claude يحلل الـ Docs</div>
     <p>ارفع الـ BRD/SRS على Claude أو ChatGPT واعمل الـ prompt ده قبل أي حاجة تانية:</p>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -483,7 +559,6 @@ code {
 
   <div class="card">
     <div class="card-title"><div class="icon">🗺️</div> الخطوة التانية — استخرج الـ Information Architecture</div>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -518,34 +593,10 @@ code {
   <div class="card">
     <div class="card-title"><div class="icon">📋</div> Output المتوقع من Phase 1</div>
     <ul class="steps">
-      <li>
-        <div class="step-num" style="background:var(--phase1)">✓</div>
-        <div class="step-content">
-          <strong>Screen List كاملة</strong>
-          <span>جدول بكل شاشة في المشروع مع وظيفتها</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:var(--phase1)">✓</div>
-        <div class="step-content">
-          <strong>User Flows موثّقة</strong>
-          <span>كل flow من أوله لآخره قبل ما تبدأ ترسم</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:var(--phase1)">✓</div>
-        <div class="step-content">
-          <strong>Figma Frame Names جاهزة</strong>
-          <span>مش هتفكر في تسمية frames — الـ AI جهّزها</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:var(--phase1)">✓</div>
-        <div class="step-content">
-          <strong>أسئلة ناقصة للـ PM/Client</strong>
-          <span>تبعتها وتأكدت من الإجابات قبل التصميم</span>
-        </div>
-      </li>
+      <li><div class="step-num" style="background:var(--phase1)">✓</div><div class="step-content"><strong>Screen List كاملة</strong><span>جدول بكل شاشة في المشروع مع وظيفتها</span></div></li>
+      <li><div class="step-num" style="background:var(--phase1)">✓</div><div class="step-content"><strong>User Flows موثّقة</strong><span>كل flow من أوله لآخره قبل ما تبدأ ترسم</span></div></li>
+      <li><div class="step-num" style="background:var(--phase1)">✓</div><div class="step-content"><strong>Figma Frame Names جاهزة</strong><span>مش هتفكر في تسمية frames — الـ AI جهّزها</span></div></li>
+      <li><div class="step-num" style="background:var(--phase1)">✓</div><div class="step-content"><strong>أسئلة ناقصة للـ PM/Client</strong><span>تبعتها وتأكدت من الإجابات قبل التصميم</span></div></li>
     </ul>
   </div>
 </div>
@@ -553,7 +604,7 @@ code {
 <div class="phase-divider"><span>Phase 2</span></div>
 
 <!-- ════════════════════════════════════════
-     PHASE 2 — RESEARCH & MOODBOARD
+     PHASE 2
 ════════════════════════════════════════ -->
 <div class="phase p2-col" id="phase2">
   <div class="phase-header">
@@ -567,7 +618,6 @@ code {
 
   <div class="card">
     <div class="card-title"><div class="icon">🎨</div> حدد الـ Visual Direction مع Claude</div>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -612,7 +662,6 @@ code {
   <div class="card">
     <div class="card-title"><div class="icon">🖼️</div> استخدم readdy.ai لتوليد الـ Moodboard</div>
     <p>بعد ما Claude يديك الـ direction، اتحول لـ readdy وجرب أكتر من variant:</p>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -646,7 +695,6 @@ Same content and layout as before.
 Premium feel.</pre>
       </div>
     </div>
-
     <div class="info-box">
       <strong>نصيحة:</strong> اعمل على الأقل 3 directions مختلفة واعرضهم على الـ stakeholders قبل ما تبدأ الـ Design System. وفّر نفسك من "مش بحبه" بعد ما تخلص.
     </div>
@@ -656,7 +704,7 @@ Premium feel.</pre>
 <div class="phase-divider"><span>Phase 3</span></div>
 
 <!-- ════════════════════════════════════════
-     PHASE 3 — DESIGN SYSTEM
+     PHASE 3
 ════════════════════════════════════════ -->
 <div class="phase p3-col" id="phase3">
   <div class="phase-header">
@@ -669,12 +717,11 @@ Premium feel.</pre>
   </div>
 
   <div class="info-box blue">
-    <strong>قاعدة ذهبية:</strong> مش هتفتح readdy وتعمل شاشة لحد ما يكون عندك Design System جاهز في Figma. الـ readdy بيشتغل أحسن لما بتديه visual reference واضح.
+    <strong>قاعدة ذهبية:</strong> مش هتفتح readdy أو Figma Make وتعمل شاشة لحد ما يكون عندك Design System جاهز في Figma. كل الـ AI tools بتشتغل أحسن لما بتديها visual reference واضح.
   </div>
 
   <div class="card">
     <div class="card-title"><div class="icon">🎯</div> هيكل الـ Figma File الصح</div>
-
     <div class="compare">
       <div class="cmp-col cmp-bad">
         <div class="cmp-head">❌ غلط</div>
@@ -701,7 +748,6 @@ Premium feel.</pre>
 
   <div class="card">
     <div class="card-title"><div class="icon">🎨</div> Figma Variables Setup — اسأل Claude يعملها</div>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -760,78 +806,26 @@ radius/sm / radius/md / radius/lg / radius/full
 
   <div class="card">
     <div class="card-title"><div class="icon">🧩</div> تسمية الـ Components والـ Layers</div>
-
     <table class="map-table">
       <thead>
-        <tr>
-          <th>نوع الـ Component</th>
-          <th>❌ غلط</th>
-          <th>✅ صح</th>
-        </tr>
+        <tr><th>نوع الـ Component</th><th>❌ غلط</th><th>✅ صح</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Button</td>
-          <td><code>Rectangle 3</code></td>
-          <td><code>button/primary/default</code></td>
-        </tr>
-        <tr>
-          <td>Input Field</td>
-          <td><code>Group 12</code></td>
-          <td><code>input/text/default</code></td>
-        </tr>
-        <tr>
-          <td>Card</td>
-          <td><code>Frame 892</code></td>
-          <td><code>card/product/default</code></td>
-        </tr>
-        <tr>
-          <td>Icon</td>
-          <td><code>Vector</code></td>
-          <td><code>icon/search</code></td>
-        </tr>
-        <tr>
-          <td>Screen</td>
-          <td><code>iPhone 15 - 1</code></td>
-          <td><code>home/feed</code></td>
-        </tr>
-        <tr>
-          <td>State</td>
-          <td><code>Variant1</code></td>
-          <td><code>state=default</code></td>
-        </tr>
+        <tr><td>Button</td><td><code>Rectangle 3</code></td><td><code>button/primary/default</code></td></tr>
+        <tr><td>Input Field</td><td><code>Group 12</code></td><td><code>input/text/default</code></td></tr>
+        <tr><td>Card</td><td><code>Frame 892</code></td><td><code>card/product/default</code></td></tr>
+        <tr><td>Icon</td><td><code>Vector</code></td><td><code>icon/search</code></td></tr>
+        <tr><td>Screen</td><td><code>iPhone 15 - 1</code></td><td><code>home/feed</code></td></tr>
+        <tr><td>State</td><td><code>Variant1</code></td><td><code>state=default</code></td></tr>
       </tbody>
     </table>
-
-    <div class="prompt-wrap">
-      <div class="prompt-label">
-        <span>Prompt</span>
-        <span class="tool-badge badge-claude">Claude</span>
-      </div>
-      <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Component List</div>
-        <pre>بناءً على شاشات التطبيق دي: [الست screen list]
-
-اعملي قائمة بكل الـ Figma Components محتاج أبنيها:
-
-Format:
-| Component Name | Variants/States | Props |
-|----------------|-----------------|-------|
-
-Categories:
-- Atoms (Button, Input, Icon, Badge, Avatar)
-- Molecules (Card, List Item, Form Field, Nav Item)  
-- Organisms (Header, Bottom Nav, Modal, Form)
-- Templates (Screen layouts)</pre>
-      </div>
-    </div>
   </div>
 </div>
 
 <div class="phase-divider"><span>Phase 4</span></div>
 
 <!-- ════════════════════════════════════════
-     PHASE 4 — الشاشات بـ READDY
+     PHASE 4 — readdy
 ════════════════════════════════════════ -->
 <div class="phase p4-col" id="phase4">
   <div class="phase-header">
@@ -846,7 +840,6 @@ Categories:
   <div class="card">
     <div class="card-title"><div class="icon">📐</div> قاعدة الـ Prompt الكامل في readdy — Multi-Screen</div>
     <p>مش هتديه شاشة بشاشة — هتديه <strong>مجموعة شاشات مترابطة في prompt واحد</strong> عشان يفهم الـ visual consistency ويطلع نتيجة أفضل:</p>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Template الأساسي — Multi-Screen</span>
@@ -863,7 +856,7 @@ Style: <span class="hi">[style]</span>. Primary: <span class="hi">[HEX]</span>. 
 Surface: <span class="hi">[HEX]</span>. Font: <span class="hi">[Font]</span>. Corner radius: <span class="hi">[Xpx]</span>.
 Icons: outlined. Spacing: 16px base grid.
 
-<span class="cm"># ═══ SCREENS — كلهم في نفس الـ prompt ═══</span>
+<span class="cm"># ═══ SCREENS ═══</span>
 <span class="hi">Design these [N] screens side by side in one frame:</span>
 
 <span class="hi2">Screen 1 — [اسم الشاشة]</span>
@@ -876,26 +869,19 @@ Purpose: [وظيفتها]
 Components: [list]
 User actions: [actions]
 
-<span class="hi2">Screen 3 — [اسم الشاشة]</span>
-Purpose: [وظيفتها]
-Components: [list]
-User actions: [actions]
-
 <span class="cm"># ═══ LAYOUT ═══</span>
 Device: iPhone 15 Pro / 390x844px each screen.
 Arrange: horizontally side by side with 32px gap.
 Consistent header and bottom nav across all screens.</pre>
       </div>
     </div>
-
     <div class="info-box">
-      <strong>القاعدة:</strong> قسّم الشاشات في <strong>groups منطقية</strong> مش screens فردية — مثلاً: Auth Flow (3 شاشات)، Onboarding (3 شاشات)، Home + Search + Filter (3 شاشات). كل group في prompt واحد.
+      <strong>القاعدة:</strong> قسّم الشاشات في <strong>groups منطقية</strong> — مثلاً: Auth Flow (3 شاشات)، Onboarding (3 شاشات)، Home + Search + Filter (3 شاشات). كل group في prompt واحد.
     </div>
   </div>
 
   <div class="card">
     <div class="card-title"><div class="icon">📱</div> أمثلة Multi-Screen Prompts جاهزة</div>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Group 1 — Auth Flow (3 شاشات)</span>
@@ -910,201 +896,362 @@ Font: Poppins. Radius: 12px. Icons: outlined.
 Design these 3 screens side by side in one frame:
 
 <span class="hi2">Screen 1 — Splash / Onboarding</span>
-Purpose: First impression, app value proposition.
-Components:
-- Full-screen gradient background with brand color
-- App logo centered
-- Tagline text below logo
-- "Get Started" CTA button (full width)
-- "Already have account? Login" text link
+Full-screen gradient background with brand color.
+App logo centered. Tagline text below logo.
+"Get Started" CTA button (full width).
+"Already have account? Login" text link.
 
 <span class="hi2">Screen 2 — Login</span>
-Purpose: Returning user signs in.
-Components:
-- "Welcome Back" H1 + subtitle
-- Email input with icon
-- Password input with show/hide toggle
-- "Forgot password?" right-aligned link
-- "Sign In" primary button (full width)
-- Divider "or" + Google/Apple social buttons
-- "New here? Create account" at bottom
+"Welcome Back" H1 + subtitle.
+Email input with icon. Password input with show/hide toggle.
+"Forgot password?" right-aligned link.
+"Sign In" primary button. Social buttons (Google/Apple).
 
 <span class="hi2">Screen 3 — Register</span>
-Purpose: New user creates account.
-Components:
-- "Create Account" H1 + subtitle
-- Name, Email, Password inputs
-- "Confirm Password" input
-- Terms checkbox + link
-- "Create Account" primary button
-- "Already have account? Login" link
+"Create Account" H1 + subtitle.
+Name, Email, Password, Confirm Password inputs.
+Terms checkbox. "Create Account" primary button.
 
 Device: iPhone 15 Pro / 390x844px each.
-Arrange horizontally with 40px gap. No bottom nav on auth screens.</pre>
-      </div>
-    </div>
-
-    <div class="prompt-wrap">
-      <div class="prompt-label">
-        <span>Group 2 — Core App Screens (4 شاشات)</span>
-        <span class="tool-badge badge-readdy">readdy.ai</span>
-      </div>
-      <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Core Screens — 4 Screens</div>
-        <pre>Same app: E-commerce fashion. Same design system as before.
-Primary: #1A1A2E. Background: #F8F8F8. Surface: #FFFFFF.
-Font: Poppins. Radius: 12px.
-
-Design these 4 screens side by side:
-
-<span class="hi2">Screen 1 — Home</span>
-Header: avatar + app logo + cart badge icon.
-Search bar. Horizontal category chips (All/Men/Women/Kids/Sale).
-Hero banner (promo image + text + CTA). 
-"New Arrivals" section title + 2-column product grid.
-Bottom nav: Home(active), Search, Wishlist, Cart, Profile.
-
-<span class="hi2">Screen 2 — Product Detail</span>
-Product image (full width, scrollable gallery dots).
-Product name, brand, price, rating + review count.
-Color selector row. Size selector row.
-Description (2 lines + "read more").
-"Add to Cart" primary button + "Wishlist" icon button.
-Bottom nav visible.
-
-<span class="hi2">Screen 3 — Cart</span>
-"My Cart (3 items)" header with back arrow.
-List of cart items: thumbnail + name + size + price + qty stepper + remove.
-Summary card: Subtotal, Shipping, Total.
-"Proceed to Checkout" primary button.
-Bottom nav visible.
-
-<span class="hi2">Screen 4 — Profile</span>
-User avatar + name + email at top.
-Menu list: Orders, Wishlist, Addresses, Payment Methods, Settings, Logout.
-Bottom nav visible with Profile active.
-
-Device: iPhone 15 Pro. Horizontal layout with 40px gap.</pre>
-      </div>
-    </div>
-
-    <div class="prompt-wrap">
-      <div class="prompt-label">
-        <span>Group 3 — States & Edge Cases (3 شاشات)</span>
-        <span class="tool-badge badge-readdy">readdy.ai</span>
-      </div>
-      <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> States — 3 Screens</div>
-        <pre>Same app and design system.
-
-Design these 3 screens side by side:
-
-<span class="hi2">Screen 1 — Empty Wishlist</span>
-Centered illustration (minimal line-art, heart theme).
-"Your wishlist is empty" heading.
-"Start exploring and save your favorites" subtitle.
-"Explore Now" CTA button.
-Bottom nav visible, Wishlist tab active.
-
-<span class="hi2">Screen 2 — Search Results (no results)</span>
-Search bar at top with "sneakers" typed.
-"No results found" centered illustration.
-"Try different keywords" message.
-Suggested popular searches as chips below.
-Bottom nav visible.
-
-<span class="hi2">Screen 3 — Order Success</span>
-Centered green checkmark animation frame.
-"Order Placed!" heading.
-Order number + estimated delivery date.
-"Track Order" outlined button.
-"Continue Shopping" primary button.
-No bottom nav (modal-style full screen).
-
-Device: iPhone 15 Pro. Horizontal layout with 40px gap.</pre>
+Arrange horizontally with 40px gap.</pre>
       </div>
     </div>
   </div>
 
   <div class="card">
     <div class="card-title"><div class="icon">🔄</div> الـ Iteration Loop مع readdy</div>
+    <ul class="steps">
+      <li><div class="step-num" style="background:var(--phase4)">1</div><div class="step-content"><strong>Generate الشاشة</strong><span>استخدم الـ full prompt template — مش prompt قصير</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4)">2</div><div class="step-content"><strong>قيّم النتيجة</strong><span>Hierarchy واضحة؟ Colors consistent؟ Spacing منتظم؟</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4)">3</div><div class="step-content"><strong>Refine بـ follow-up prompt</strong><span>"Make the CTA button bigger" / "Add more spacing between sections"</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4)">4</div><div class="step-content"><strong>Export وادخل Figma</strong><span>استخدم الـ output كـ reference — مش final design</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4)">5</div><div class="step-content"><strong>Rebuild في Figma بـ Components</strong><span>الـ readdy output مجرد direction — الـ Figma file هو الـ source of truth</span></div></li>
+    </ul>
+  </div>
+</div>
 
+<div class="phase-divider"><span>Phase 4B</span></div>
+
+<!-- ════════════════════════════════════════
+     PHASE 4B — FIGMA MAKE
+════════════════════════════════════════ -->
+<div class="phase p4b-col" id="phase4b">
+  <div class="phase-header">
+    <div class="phase-num" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">4B</div>
+    <div class="phase-meta">
+      <div class="phase-label">Phase 4B — البديل الأقوى لـ readdy</div>
+      <div class="phase-title">تصميم الشاشات بـ Figma Make</div>
+      <div class="phase-desc">Figma Make بيخليك تولّد شاشات وـ components مباشرة جوّا Figma من prompt — من غير ما تخرج من الـ file</div>
+    </div>
+  </div>
+
+  <div class="info-box cyan">
+    <strong>إيه هو Figma Make؟</strong> هو الـ AI المدمج في Figma نفسها — بتكتب prompt وهو بيولّد frames وـ components حقيقية جوّا الـ file بتاعك مباشرة، مش صورة تاني تستورد منها. الـ output بيكون <strong>Figma layers فعلية</strong> مش image.
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="card">
+    <div class="card-title"><div class="icon">⚖️</div> الفرق بين readdy و Figma Make — امتى تستخدم إيه؟</div>
+
+    <div class="vs-grid">
+      <div class="vs-col readdy-col">
+        <div class="vs-head">🎨 readdy.ai</div>
+        <div class="vs-body">
+          <div class="vs-item"><div class="vs-dot"></div>بيولّد image/screenshot للتصميم</div>
+          <div class="vs-item"><div class="vs-dot"></div>الـ output صورة — لازم تعيد تبنيه في Figma</div>
+          <div class="vs-item"><div class="vs-dot"></div>أسرع في الـ visual exploration والـ moodboarding</div>
+          <div class="vs-item"><div class="vs-dot"></div>أحسن لما تكون في مرحلة التجريب والـ ideation</div>
+          <div class="vs-item"><div class="vs-dot"></div>مش بيحتاج Figma مفتوحة</div>
+          <div class="vs-item"><div class="vs-dot"></div>الـ design system غير مضمون فيه</div>
+        </div>
+      </div>
+      <div class="vs-sep">VS</div>
+      <div class="vs-col figmamake-col">
+        <div class="vs-head">✦ Figma Make</div>
+        <div class="vs-body">
+          <div class="vs-item"><div class="vs-dot"></div>بيولّد Figma layers حقيقية مباشرة في الـ file</div>
+          <div class="vs-item"><div class="vs-dot"></div>الـ output قابل للتعديل فوراً — مش image</div>
+          <div class="vs-item"><div class="vs-dot"></div>بيستخدم الـ components والـ variables الموجودة عندك</div>
+          <div class="vs-item"><div class="vs-dot"></div>أحسن لما يكون عندك Design System جاهز</div>
+          <div class="vs-item"><div class="vs-dot"></div>بيوفّر وقت الـ rebuild من صفر</div>
+          <div class="vs-item"><div class="vs-dot"></div>الـ output consistent مع باقي التصميم</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="use-case-grid">
+      <div class="uc-card uc-readdy">
+        <div class="uc-title">🎨 استخدم readdy لـ</div>
+        <ul class="uc-list">
+          <li>أول مرة تشوف شكل التصميم (Moodboard)</li>
+          <li>تجريب directions مختلفة بسرعة</li>
+          <li>إقناع الـ client بالـ visual direction</li>
+          <li>inspiration وـ reference للـ Figma</li>
+        </ul>
+      </div>
+      <div class="uc-card uc-figmamake">
+        <div class="uc-title">✦ استخدم Figma Make لـ</div>
+        <ul class="uc-list">
+          <li>بناء شاشات جديدة بعد ما الـ DS جاهز</li>
+          <li>توليد variations لشاشة موجودة</li>
+          <li>إضافة empty/error states بسرعة</li>
+          <li>prototype screens من الـ components بتاعتك</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="card">
+    <div class="card-title"><div class="icon">🚀</div> إزاي تفتح Figma Make وتبدأ</div>
     <ul class="steps">
       <li>
-        <div class="step-num" style="background:var(--phase4)">1</div>
+        <div class="step-num" style="background:var(--phase4b)">1</div>
         <div class="step-content">
-          <strong>Generate الشاشة</strong>
-          <span>استخدم الـ full prompt template — مش prompt قصير</span>
+          <strong>افتح Figma وروح على الـ file بتاعك</strong>
+          <span>تأكد إن الـ Design System والـ Components معمولين الأول (Phase 3)</span>
         </div>
       </li>
       <li>
-        <div class="step-num" style="background:var(--phase4)">2</div>
+        <div class="step-num" style="background:var(--phase4b)">2</div>
         <div class="step-content">
-          <strong>قيّم النتيجة بالـ criteria دول</strong>
-          <span>Hierarchy واضحة؟ Colors consistent؟ Spacing منتظم؟ المحتوى صح؟</span>
+          <strong>افتح Figma Make من القائمة</strong>
+          <span>Main Menu → Plugins → Figma Make — أو من الـ toolbar مباشرة لو ظاهر</span>
         </div>
       </li>
       <li>
-        <div class="step-num" style="background:var(--phase4)">3</div>
+        <div class="step-num" style="background:var(--phase4b)">3</div>
         <div class="step-content">
-          <strong>Refine بـ follow-up prompt</strong>
-          <span>"Make the CTA button bigger" / "Add more spacing between sections" / "Change header style"</span>
+          <strong>اكتب الـ prompt واختار الـ context</strong>
+          <span>Figma Make بيسألك تحدد frame أو component كـ reference — اختار الـ Design System frame</span>
         </div>
       </li>
       <li>
-        <div class="step-num" style="background:var(--phase4)">4</div>
+        <div class="step-num" style="background:var(--phase4b)">4</div>
         <div class="step-content">
-          <strong>Export وادخل Figma</strong>
-          <span>استخدم الـ output كـ reference — مش final design</span>
+          <strong>راجع الـ output وعدّل</strong>
+          <span>الـ layers بتتعمل في الـ canvas مباشرة — تقدر تعدل فيها زي أي frame عادية</span>
         </div>
       </li>
       <li>
-        <div class="step-num" style="background:var(--phase4)">5</div>
+        <div class="step-num" style="background:var(--phase4b)">5</div>
         <div class="step-content">
-          <strong>Rebuild في Figma بـ Components</strong>
-          <span>الـ readdy output مجرد direction — الـ Figma file هو الـ source of truth</span>
+          <strong>اربط الـ Components اليدوي</strong>
+          <span>Figma Make ممكن يعمل buttons كـ groups — تأكد إنك بتبدّلها بـ components من الـ library</span>
         </div>
       </li>
     </ul>
   </div>
 
+  <!-- PROMPTS -->
   <div class="card">
-    <div class="card-title"><div class="icon">⚡</div> Prompts لحالات خاصة</div>
+    <div class="card-title"><div class="icon">📝</div> Prompts جاهزة لـ Figma Make</div>
 
     <div class="prompt-wrap">
       <div class="prompt-label">
-        <span>لو النتيجة مش عاجباك</span>
-        <span class="tool-badge badge-readdy">readdy.ai</span>
+        <span>توليد شاشة كاملة</span>
+        <span class="tool-badge badge-figmamake">Figma Make</span>
       </div>
       <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Refinement Prompts</div>
-        <pre><span class="cm"># لو الـ hierarchy مش واضحة</span>
-Redesign with stronger visual hierarchy.
-Make the primary action more prominent.
-Use size and weight contrast more aggressively.
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Full Screen Generation</div>
+        <pre><span class="cm"># الـ prompt الأساسي لتوليد شاشة جديدة</span>
 
-<span class="cm">---</span>
+Create a mobile screen for the <span class="hi">[screen name]</span> page.
 
-<span class="cm"># لو الـ spacing مش كويس</span>
-Increase white space. 
-Add more breathing room between sections.
-Use consistent 16px padding throughout.
+<span class="hi4">Use the existing components from the design system:</span>
+- Use the button components already defined
+- Apply the color variables (brand/primary, background/default)
+- Follow the spacing system (spacing/4 = 16px)
+- Use the same corner radius as the existing cards
 
-<span class="cm">---</span>
+<span class="hi">Layout:</span>
+- Device: iPhone 15 Pro (390x844px)
+- Top: StatusBar + Header with back arrow and title "[عنوان الشاشة]"
+- Content: [وصف محتوى الشاشة]
+- Bottom: Primary CTA button pinned to bottom
 
-<span class="cm"># لو عايز تشوف dark mode</span>
-Convert this design to dark mode.
-Dark background: #121212, Surface: #1E1E1E.
-Keep same layout and components.
+<span class="hi">Content sections:</span>
+1. [Section 1 — وصف]
+2. [Section 2 — وصف]
+3. [Section 3 — وصف]
 
-<span class="cm">---</span>
-
-<span class="cm"># لو عايز variation</span>
-Show an alternative layout for the same screen.
-More card-based approach.
-Keep same color palette and style.</pre>
+Match the visual style of the existing screens in this file.</pre>
       </div>
     </div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>توليد Empty State</span>
+        <span class="tool-badge badge-figmamake">Figma Make</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Empty & Error States</div>
+        <pre><span class="cm"># Empty State لأي شاشة</span>
+
+Create an empty state for the <span class="hi">[screen name]</span> screen.
+
+Center-aligned layout:
+- Simple illustration using basic shapes (no images)
+  Use brand primary color: [HEX]
+- Heading: "<span class="hi">[عنوان Empty State]</span>" — H2 style
+- Subtitle: "<span class="hi">[جملة توضيح]</span>" — body/secondary color
+- CTA button: "<span class="hi">[نص الـ CTA]</span>" — primary button component
+
+<span class="cm">---</span>
+
+<span class="cm"># Error State</span>
+
+Create an error state for when <span class="hi">[سبب الـ error]</span>.
+
+Layout:
+- Warning icon (outlined, semantic/error color)
+- "Something went wrong" heading
+- Error description text
+- "Try Again" outlined button
+- "Go Back" text link below
+
+Use same spacing and typography as existing screens.</pre>
+      </div>
+    </div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>توليد Component Variants</span>
+        <span class="tool-badge badge-figmamake">Figma Make</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Component Variants</div>
+        <pre><span class="cm"># توليد كل states لـ component معين</span>
+
+Create all variants of the <span class="hi">[component name]</span> component.
+Arrange them in a single frame with labels.
+
+<span class="hi4">States to generate:</span>
+1. Default — normal state
+2. Hover — slightly highlighted (opacity or color shift)
+3. Active / Pressed — darker or scaled down slightly
+4. Disabled — reduced opacity (40%), no interaction
+5. Loading — show a spinner or skeleton where content is
+6. Error — border in semantic/error color, error message below
+
+<span class="hi">Visual rules:</span>
+- Same dimensions for all variants
+- Label each variant below in caption/secondary text
+- Use a light background frame to contain all variants
+- Apply the existing color variables — no hardcoded values</pre>
+      </div>
+    </div>
+
+    <div class="prompt-wrap">
+      <div class="prompt-label">
+        <span>توليد Flow كامل (Multi-Screen)</span>
+        <span class="tool-badge badge-figmamake">Figma Make</span>
+      </div>
+      <div class="prompt-box">
+        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Full Flow Generation</div>
+        <pre><span class="cm"># توليد flow كامل في frame واحد</span>
+
+Create a <span class="hi">[flow name]</span> flow with <span class="hi">[N]</span> screens.
+Arrange all screens horizontally in one frame with 40px gap between each.
+
+<span class="hi4">Use the existing Design System:</span>
+- Pull colors from the color variables in this file
+- Use the same button, input, and card styles
+- Match header and bottom nav from existing screens
+
+<span class="hi2">Screen 1 — [اسم]</span>
+[وصف المحتوى]
+
+<span class="hi2">Screen 2 — [اسم]</span>
+[وصف المحتوى]
+
+<span class="hi2">Screen 3 — [اسم]</span>
+[وصف المحتوى]
+
+Add a flow arrow (→) between each screen to indicate user progression.
+Label each screen with its name below the frame.</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="card">
+    <div class="card-title"><div class="icon">⚡</div> نصايح عشان تاخد أحسن نتيجة من Figma Make</div>
+
+    <div class="compare">
+      <div class="cmp-col cmp-bad">
+        <div class="cmp-head">❌ Prompt ضعيف</div>
+        <pre>Make a login screen
+for my app with email
+and password.</pre>
+      </div>
+      <div class="cmp-col cmp-good">
+        <div class="cmp-head">✅ Prompt قوي</div>
+        <pre>Create Login screen.
+390x844px. Use existing
+color variables and button
+components. Email + Password
+inputs. "Sign In" primary btn.
+Match style of Home screen.</pre>
+      </div>
+    </div>
+
+    <ul class="checklist" style="margin-top:12px;">
+      <li class="cat-row">✦ قواعد الـ Prompt في Figma Make</li>
+      <li><div class="cbox" style="border-color:var(--phase4b)"></div> دايماً اكتب "Use existing components/variables" في الـ prompt</li>
+      <li><div class="cbox" style="border-color:var(--phase4b)"></div> حدد الـ device dimensions بالـ px (390x844 لـ iPhone 15)</li>
+      <li><div class="cbox" style="border-color:var(--phase4b)"></div> اذكر اسم الـ screen أو component reference اللي عايز يشبهه</li>
+      <li><div class="cbox" style="border-color:var(--phase4b)"></div> بعد الـ generation، بدّل أي hardcoded color بـ variables يدوياً</li>
+      <li><div class="cbox" style="border-color:var(--phase4b)"></div> راجع إن الـ groups اتحولت لـ components من الـ library بتاعتك</li>
+      <li><div class="cbox" style="border-color:var(--phase4b)"></div> استخدم "Refine" أو "Edit" بدل ما تعيد من أول — وفّر وقت</li>
+    </ul>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="card">
+    <div class="card-title"><div class="icon">🔄</div> الـ Hybrid Workflow — readdy + Figma Make معاً</div>
+    <p>الأذكى مش إنك تختار واحدة — إنك تستخدم كل tool في مكانها الصح:</p>
+    <ul class="steps">
+      <li>
+        <div class="step-num" style="background:var(--phase4)">A</div>
+        <div class="step-content">
+          <strong>readdy — لأول 20% (Exploration)</strong>
+          <span>جرّب directions، عمل moodboard، قنّع الـ client بالـ visual style</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase3)">B</div>
+        <div class="step-content">
+          <strong>Figma — ابنِ الـ Design System (Phase 3)</strong>
+          <span>Variables، Components، Typography — الأساس اللي كل حاجة هتتبنى عليه</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase4b)">C</div>
+        <div class="step-content">
+          <strong>Figma Make — لباقي الشاشات (80%)</strong>
+          <span>بعد ما الـ DS جاهز، ولّد الشاشات مباشرة في Figma — consistent وبدون rebuild</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-num" style="background:var(--phase5)">D</div>
+        <div class="step-content">
+          <strong>Cleanup يدوي (Phase 5)</strong>
+          <span>راجع كل الـ layers، اربط الـ components، وأضف الـ annotations</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="card">
+    <div class="card-title"><div class="icon">📋</div> Output المتوقع من Phase 4B</div>
+    <ul class="steps">
+      <li><div class="step-num" style="background:var(--phase4b)">✓</div><div class="step-content"><strong>كل الشاشات كـ Figma Layers حقيقية</strong><span>مش images — قابلة للتعديل مباشرة في الـ file</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4b)">✓</div><div class="step-content"><strong>Empty وـ Error States جاهزة</strong><span>Figma Make بيولّدها بسرعة من نفس الـ Design System</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4b)">✓</div><div class="step-content"><strong>Component Variants موثّقة</strong><span>كل states لكل component في frame واحدة</span></div></li>
+      <li><div class="step-num" style="background:var(--phase4b)">✓</div><div class="step-content"><strong>Flows جاهزة للـ Prototype</strong><span>الشاشات متربطة ومنظّمة في Figma جاهزة للـ handoff</span></div></li>
+    </ul>
   </div>
 </div>
 
@@ -1125,7 +1272,6 @@ Keep same color palette and style.</pre>
 
   <div class="card">
     <div class="card-title"><div class="icon">🧹</div> Pre-Handoff Cleanup بمساعدة Claude</div>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -1157,7 +1303,6 @@ Keep same color palette and style.</pre>
   <div class="card">
     <div class="card-title"><div class="icon">📝</div> Figma Dev Mode Annotations</div>
     <p>في كل component مهم، اكتب note للـ developer في Dev Mode:</p>
-
     <div class="compare">
       <div class="cmp-col cmp-bad">
         <div class="cmp-head">❌ بدون annotation</div>
@@ -1190,34 +1335,28 @@ Price: format as currency</pre>
         <li><div class="cbox"></div> Figma Variables معمولة (Colors, Typography, Spacing, Radius)</li>
         <li><div class="cbox"></div> كل الـ text styles محددة وـ Auto-applied</li>
         <li><div class="cbox"></div> مفيش hardcoded colors في أي screen</li>
-
         <li class="cat-row">🏷️ Naming & Structure</li>
         <li><div class="cbox"></div> الـ Figma file فيه 4 pages: Design System / Components / Screens / Flows</li>
         <li><div class="cbox"></div> كل الـ Screens مسماة بـ snake_case: <code>auth/login</code>, <code>home/feed</code></li>
         <li><div class="cbox"></div> كل الـ Layers مسماة (مفيش Frame 892)</li>
         <li><div class="cbox"></div> كل الـ Components Figma Components (مش Groups)</li>
-
         <li class="cat-row">📐 Layout</li>
         <li><div class="cbox"></div> Auto Layout مستخدم في كل الـ frames</li>
         <li><div class="cbox"></div> مفيش absolute positioning (غير للعناصر الـ overlay)</li>
         <li><div class="cbox"></div> الـ spacing من الـ Variables (مش hardcoded)</li>
-
         <li class="cat-row">🧩 Components</li>
         <li><div class="cbox"></div> كل Component عنده Variants: default, hover, disabled, loading, error</li>
         <li><div class="cbox"></div> الـ Component Properties موثّقة (text, icon, isEnabled)</li>
         <li><div class="cbox"></div> Empty states مصمّمة لكل list/feed</li>
         <li><div class="cbox"></div> Error states مصمّمة لكل form/request</li>
-
         <li class="cat-row">📝 Dev Annotations</li>
         <li><div class="cbox"></div> كل شاشة عندها وصف وظيفتها</li>
         <li><div class="cbox"></div> الـ interactive elements فيها navigation annotation</li>
         <li><div class="cbox"></div> الـ API-dependent components فيها endpoint reference</li>
-
         <li class="cat-row">🖼️ Assets</li>
         <li><div class="cbox"></div> الـ Icons exported كـ SVG</li>
         <li><div class="cbox"></div> الـ Images placeholders واضحة</li>
         <li><div class="cbox"></div> الـ App Icon في كل المقاسات</li>
-
         <li class="cat-row">🔗 Prototype</li>
         <li><div class="cbox"></div> كل الـ User Flows متربطة في Prototype</li>
         <li><div class="cbox"></div> الـ Navigation actions موضحة</li>
@@ -1228,7 +1367,6 @@ Price: format as currency</pre>
 
   <div class="card">
     <div class="card-title"><div class="icon">📄</div> Handoff Document — اطلب Claude يكتبه</div>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Prompt</span>
@@ -1245,23 +1383,19 @@ Price: format as currency</pre>
 <span class="hi">1. Design Overview</span>
    - الـ Design System summary
    - Color palette مع الـ HEX codes
-   - Typography scale
-   - Spacing system
+   - Typography scale / Spacing system
 
 <span class="hi">2. Screen Inventory</span>
    - جدول بكل الشاشات مع الـ Figma frame link
 
 <span class="hi">3. Component Library</span>
-   - قائمة بكل الـ components
-   - الـ variants والـ states لكل واحد
+   - قائمة بكل الـ components مع الـ variants والـ states
 
 <span class="hi">4. Interaction Notes</span>
-   - الـ transitions المطلوبة
-   - الـ animations
+   - الـ transitions المطلوبة / الـ animations
 
 <span class="hi">5. Assets</span>
-   - رابط مجلد الـ assets
-   - naming convention
+   - رابط مجلد الـ assets / naming convention
 
 <span class="hi">6. Questions & Clarifications</span>
    - أي حاجة الـ developer يسأل عنها، إجابتها هنا</pre>
@@ -1273,7 +1407,7 @@ Price: format as currency</pre>
 <div class="phase-divider"><span>Phase 6</span></div>
 
 <!-- ════════════════════════════════════════
-     PHASE 6 — BEHANCE PRESENTATION
+     PHASE 6 — BEHANCE
 ════════════════════════════════════════ -->
 <div class="phase" id="phase6" style="--phase-color:#e11d48;">
   <div class="phase-header">
@@ -1289,42 +1423,21 @@ Price: format as currency</pre>
     <strong>ليه ده أحسن؟</strong> مش هتعمل screenshots ومش هتاخد HTML وتفوّته — Claude بيدخل على الـ Figma file بتاعك مباشرة، بيقرأ كل شاشاتك وألوانك وـ Design System، ويبني الـ Behance case study كـ <strong>Figma page جديدة</strong> جنب تصميمك. إنت بس بتعمل Export وتحمّله على Behance.
   </div>
 
-  <!-- HOW IT WORKS -->
   <div class="card">
     <div class="card-title"><div class="icon">⚙️</div> إزاي الموضوع بيشتغل — Claude + Figma MCP</div>
-
     <table class="map-table">
       <thead><tr><th>الخطوة</th><th>Claude بيعمل إيه</th><th>الـ Tool</th></tr></thead>
       <tbody>
-        <tr>
-          <td>1 — يقرأ التصميم</td>
-          <td><code>get_design_context</code> — بيشوف كل الـ frames والألوان والـ components</td>
-          <td><span class="tag-inline t-purple">Figma MCP</span></td>
-        </tr>
-        <tr>
-          <td>2 — يفهم الـ Design System</td>
-          <td><code>search_design_system</code> — بيجيب الـ variables والـ typography</td>
-          <td><span class="tag-inline t-purple">Figma MCP</span></td>
-        </tr>
-        <tr>
-          <td>3 — يبني الـ Presentation</td>
-          <td><code>use_figma</code> — بيكتب JavaScript يعمل frames وـ layouts وـ text جوّا Figma</td>
-          <td><span class="tag-inline t-purple">Figma MCP</span></td>
-        </tr>
-        <tr>
-          <td>4 — إنت بس تعمل Export</td>
-          <td>اختار الـ Behance page → Export as PNG → Upload على Behance</td>
-          <td><span class="tag-inline t-green">Figma</span></td>
-        </tr>
+        <tr><td>1 — يقرأ التصميم</td><td><code>get_design_context</code> — بيشوف كل الـ frames والألوان والـ components</td><td><span class="tag-inline t-purple">Figma MCP</span></td></tr>
+        <tr><td>2 — يفهم الـ Design System</td><td><code>search_design_system</code> — بيجيب الـ variables والـ typography</td><td><span class="tag-inline t-purple">Figma MCP</span></td></tr>
+        <tr><td>3 — يبني الـ Presentation</td><td><code>use_figma</code> — بيكتب JavaScript يعمل frames وـ layouts وـ text جوّا Figma</td><td><span class="tag-inline t-purple">Figma MCP</span></td></tr>
+        <tr><td>4 — إنت بس تعمل Export</td><td>اختار الـ Behance page → Export as PNG → Upload على Behance</td><td><span class="tag-inline t-green">Figma</span></td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- MAIN PROMPT -->
   <div class="card">
     <div class="card-title"><div class="icon">🎨</div> Main Prompt — Claude builds the Behance in Figma</div>
-    <p>Open Claude, make sure the Figma connector is connected, and send this prompt with your Figma file link:</p>
-
     <div class="prompt-wrap">
       <div class="prompt-label">
         <span>Main Prompt</span>
@@ -1345,160 +1458,46 @@ I want you to build a Behance case study presentation as a new Figma page inside
 4. Build these sections as Figma frames at 1440px width:
 
 <span class="hi2">Frame 1 — HERO COVER (1440×810px)</span>
-- Background using the primary color from the design system
-- App name in large bold type (use the project's heading font)
-- Short tagline below the name
-- Placeholder area for a phone mockup (labeled clearly)
-- Designer name in the bottom corner
+Background using the primary color from the design system.
+App name in large bold type. Short tagline below.
+Placeholder area for a phone mockup.
 
 <span class="hi2">Frame 2 — PROJECT OVERVIEW (1440×600px)</span>
-- App name + 2–3 sentence project description
-- 3 info cards side by side: Role | Tools | Year
-- Clean card-style layout
+App name + 2–3 sentence project description.
+3 info cards: Role | Tools | Year.
 
 <span class="hi2">Frame 3 — DESIGN SYSTEM (1440×700px)</span>
-- Color palette: each color in a labeled swatch with its HEX code
-- Typography scale: font name + H1 / H2 / Body / Caption samples
-- Corner radius and spacing tokens (if found in the file)
+Color palette swatches with HEX codes.
+Typography scale samples. Spacing tokens.
 
 <span class="hi2">Frame 4 — SCREENS SHOWCASE (1440×1200px)</span>
-- Display 4–6 of the key screens
-- Each screen inside a simple rounded-rectangle phone frame
-- Screen name label below each one
-- Dark background so the screens stand out
+4–6 key screens inside phone frames.
+Dark background. Screen name label below each.
 
 <span class="hi2">Frame 5 — KEY FEATURES (1440×700px)</span>
-- 3 or 4 standout features of the app
-- Each feature: icon (emoji or simple shape) + title + one-line description
-- Equal-width horizontal layout
+3–4 features: icon + title + description.
 
 <span class="hi2">Frame 6 — CLOSING (1440×500px)</span>
-- "Thank You" or a short closing line
-- Designer name
-- "Made with Figma" badge
+"Thank You" + designer name + "Made with Figma" badge.
 
 <span class="hi">Rules:</span>
-- Use the same fonts and colors from the project's design system — no hardcoded values
-- Apply Auto Layout to every frame
-- Consistent padding: 48px on all sides
-- Clear layer names: behance/hero, behance/overview, behance/design-system, etc.</pre>
+- Use same fonts and colors from design system
+- Auto Layout on every frame / 48px padding
+- Clear layer names: behance/hero, behance/overview, etc.</pre>
       </div>
     </div>
   </div>
 
-  <!-- ITERATION PROMPTS -->
-  <div class="card">
-    <div class="card-title"><div class="icon">🔁</div> Iteration & Refinement Prompts</div>
-
-    <div class="prompt-wrap">
-      <div class="prompt-label">
-        <span>When you want to refine a section</span>
-        <span class="tool-badge badge-claude">Claude + Figma MCP</span>
-      </div>
-      <div class="prompt-box">
-        <div class="pb-header"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div> Refinement Prompts</div>
-        <pre><span class="cm"># Update the Hero frame</span>
-In the "Behance Presentation" page, update the Hero frame:
-Change the background to a gradient from [HEX1] to [HEX2] instead of solid.
-Increase the app name font size to 96px.
-
-<span class="cm">---</span>
-
-<span class="cm"># Add a new section</span>
-Add a new frame after Key Features:
-"USER JOURNEY" — build a simple flowchart using Figma shapes
-showing the user's path: Onboarding → Login → Home → Product → Checkout
-
-<span class="cm">---</span>
-
-<span class="cm"># Create a dark version</span>
-Create a dark mode version of the HERO frame:
-Background: #0A0A0A, text: #FFFFFF, accent: same primary color as the design.
-Save it as a separate frame named "behance/hero-dark"
-
-<span class="cm">---</span>
-
-<span class="cm"># Audit and fix</span>
-Review all frames in the "Behance Presentation" page.
-Identify any spacing issues or unreadable text.
-Then fix them directly in Figma.</pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- WORKFLOW STEPS -->
   <div class="card">
     <div class="card-title"><div class="icon">🔄</div> Full Workflow — Step by Step</div>
     <ul class="steps">
-      <li>
-        <div class="step-num" style="background:#e11d48;">1</div>
-        <div class="step-content">
-          <strong>Connect Claude to Figma</strong>
-          <span>Claude.ai → Settings → Connectors → Figma → Connect. Then open a new chat.</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:#e11d48;">2</div>
-        <div class="step-content">
-          <strong>Send the prompt with your Figma link</strong>
-          <span>Claude will open the file, read all screens, colors, and Design System automatically.</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:#e11d48;">3</div>
-        <div class="step-content">
-          <strong>Claude builds the Presentation</strong>
-          <span>It creates a new "Behance Presentation" page with all frames directly inside your Figma file.</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:#e11d48;">4</div>
-        <div class="step-content">
-          <strong>Review and iterate</strong>
-          <span>Open Figma to check the result. Send a follow-up prompt for any changes — Claude edits directly.</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:#e11d48;">5</div>
-        <div class="step-content">
-          <strong>Export from Figma</strong>
-          <span>Select all frames in the Behance page → Export as PNG 2x (or 1x if file size is too large).</span>
-        </div>
-      </li>
-      <li>
-        <div class="step-num" style="background:#e11d48;">6</div>
-        <div class="step-content">
-          <strong>Upload to Behance</strong>
-          <span>New Project → Upload PNGs in order → Title + Description + Tags → Publish.</span>
-        </div>
-      </li>
+      <li><div class="step-num" style="background:#e11d48;">1</div><div class="step-content"><strong>Connect Claude to Figma</strong><span>Claude.ai → Settings → Connectors → Figma → Connect.</span></div></li>
+      <li><div class="step-num" style="background:#e11d48;">2</div><div class="step-content"><strong>Send the prompt with your Figma link</strong><span>Claude will open the file, read all screens, colors, and Design System automatically.</span></div></li>
+      <li><div class="step-num" style="background:#e11d48;">3</div><div class="step-content"><strong>Claude builds the Presentation</strong><span>Creates a new "Behance Presentation" page with all frames directly inside your Figma file.</span></div></li>
+      <li><div class="step-num" style="background:#e11d48;">4</div><div class="step-content"><strong>Review and iterate</strong><span>Open Figma to check the result. Send follow-up prompts for changes.</span></div></li>
+      <li><div class="step-num" style="background:#e11d48;">5</div><div class="step-content"><strong>Export from Figma</strong><span>Select all frames → Export as PNG 2x.</span></div></li>
+      <li><div class="step-num" style="background:#e11d48;">6</div><div class="step-content"><strong>Upload to Behance</strong><span>New Project → Upload PNGs in order → Publish.</span></div></li>
     </ul>
-  </div>
-
-  <!-- CHECKLIST -->
-  <div class="card">
-    <div class="card-title"><div class="icon">✅</div> Behance Upload Checklist</div>
-    <div style="overflow:hidden; border-radius:8px; border:1px solid var(--border);">
-      <ul class="checklist">
-        <li class="cat-row">🖼️ Figma Frames</li>
-        <li><div class="cbox"></div> Every frame is 1440px wide (Behance standard)</li>
-        <li><div class="cbox"></div> Order is correct: Cover → Overview → DS → Screens → Features → Closing</li>
-        <li><div class="cbox"></div> Colors and fonts come from the Design System — no hardcoded values</li>
-        <li><div class="cbox"></div> Layer names are clear: <code>behance/hero</code>, <code>behance/screens</code></li>
-
-        <li class="cat-row">📤 Export</li>
-        <li><div class="cbox"></div> PNG 2x — no frame smaller than 1440×600px</li>
-        <li><div class="cbox"></div> No frame has clipped text or overflow</li>
-        <li><div class="cbox"></div> Files named in order: 01-cover, 02-overview, etc.</li>
-
-        <li class="cat-row">📝 Behance Project Info</li>
-        <li><div class="cbox"></div> Clear and distinct project title</li>
-        <li><div class="cbox"></div> Description: 2–3 sentences in English</li>
-        <li><div class="cbox"></div> Tags: UI, UX, Mobile App, Figma, [App Category]</li>
-        <li><div class="cbox"></div> Tools: Figma (required for Behance search visibility)</li>
-        <li><div class="cbox"></div> Cover Image: set to the Hero frame (the most striking one)</li>
-      </ul>
-    </div>
   </div>
 </div>
 
@@ -1509,57 +1508,23 @@ Then fix them directly in Figma.</pre>
   <div style="font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--ink3); margin-bottom:16px;">الملخص الكامل</div>
   <table class="map-table">
     <thead>
-      <tr>
-        <th>Phase</th>
-        <th>المهمة</th>
-        <th>الـ Tool</th>
-        <th>الـ Output</th>
-      </tr>
+      <tr><th>Phase</th><th>المهمة</th><th>الـ Tool</th><th>الـ Output</th></tr>
     </thead>
     <tbody>
-      <tr>
-        <td><span class="tag-inline t-orange">01</span> تحليل</td>
-        <td>قرا الـ BRD/SRS واستخرج الـ screens</td>
-        <td><span class="tag-inline t-blue">Claude</span></td>
-        <td>Screen list + User flows + Frame names</td>
-      </tr>
-      <tr>
-        <td><span class="tag-inline t-orange">02</span> Research</td>
-        <td>حدد الـ visual direction</td>
-        <td><span class="tag-inline t-blue">Claude</span> <span class="tag-inline t-orange">readdy</span></td>
-        <td>Color palette + Typography + Moodboard</td>
-      </tr>
-      <tr>
-        <td><span class="tag-inline t-blue">03</span> Design System</td>
-        <td>ابني الـ Variables والـ Components</td>
-        <td><span class="tag-inline t-green">Figma</span></td>
-        <td>Design System جاهز للـ use</td>
-      </tr>
-      <tr>
-        <td><span class="tag-inline t-purple">04</span> Screens</td>
-        <td>صمم الشاشات بـ AI</td>
-        <td><span class="tag-inline t-orange">readdy</span> <span class="tag-inline t-green">Figma</span></td>
-        <td>كل الشاشات كاملة</td>
-      </tr>
-      <tr>
-        <td><span class="tag-inline t-green">05</span> Handoff</td>
-        <td>نظّف وسلّم للـ developers</td>
-        <td><span class="tag-inline t-green">Figma</span> <span class="tag-inline t-blue">Claude</span></td>
-        <td>Production-ready Figma file</td>
-      </tr>
-      <tr>
-        <td><span class="tag-inline" style="background:rgba(225,29,72,0.12);color:#e11d48;border:1px solid rgba(225,29,72,0.3);">06</span> Behance</td>
-        <td>Claude يبني الـ presentation جوّا Figma مباشرة</td>
-        <td><span class="tag-inline t-blue">Claude</span> <span class="tag-inline t-purple">Figma MCP</span></td>
-        <td>Behance Figma Page جاهزة للـ Export</td>
-      </tr>
+      <tr><td><span class="tag-inline t-orange">01</span> تحليل</td><td>قرا الـ BRD/SRS واستخرج الـ screens</td><td><span class="tag-inline t-blue">Claude</span></td><td>Screen list + User flows + Frame names</td></tr>
+      <tr><td><span class="tag-inline t-orange">02</span> Research</td><td>حدد الـ visual direction</td><td><span class="tag-inline t-blue">Claude</span> <span class="tag-inline t-orange">readdy</span></td><td>Color palette + Typography + Moodboard</td></tr>
+      <tr><td><span class="tag-inline t-blue">03</span> Design System</td><td>ابني الـ Variables والـ Components</td><td><span class="tag-inline t-green">Figma</span></td><td>Design System جاهز للـ use</td></tr>
+      <tr><td><span class="tag-inline t-purple">04</span> readdy Screens</td><td>Exploration وـ Moodboard بـ AI</td><td><span class="tag-inline t-orange">readdy</span></td><td>Visual reference + Direction مؤكد</td></tr>
+      <tr><td><span class="tag-inline t-cyan">4B</span> Figma Make</td><td>بناء الشاشات الفعلي جوّا Figma</td><td><span class="tag-inline t-cyan">Figma Make</span> <span class="tag-inline t-green">Figma</span></td><td>Figma Layers حقيقية + States + Flows</td></tr>
+      <tr><td><span class="tag-inline t-green">05</span> Handoff</td><td>نظّف وسلّم للـ developers</td><td><span class="tag-inline t-green">Figma</span> <span class="tag-inline t-blue">Claude</span></td><td>Production-ready Figma file</td></tr>
+      <tr><td><span class="tag-inline" style="background:rgba(225,29,72,0.12);color:#e11d48;border:1px solid rgba(225,29,72,0.3);">06</span> Behance</td><td>Claude يبني الـ presentation جوّا Figma مباشرة</td><td><span class="tag-inline t-blue">Claude</span> <span class="tag-inline t-purple">Figma MCP</span></td><td>Behance Figma Page جاهزة للـ Export</td></tr>
     </tbody>
   </table>
 </div>
 
 <!-- Footer -->
 <div style="text-align:center; margin-top:64px; padding-top:32px; border-top:2px solid var(--border); color:var(--ink3); font-size:13px;">
-  UI Designer AI Workflow Guide | readdy.ai + Claude + Figma + Behance<br>
+  UI Designer AI Workflow Guide | readdy.ai + Figma Make + Claude + Figma + Behance<br>
   <span style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px;">الـ AI بس بيكمّل تفكيرك — مش بيحل محله</span>
 </div>
 
@@ -1568,7 +1533,6 @@ Then fix them directly in Figma.</pre>
 <button class="print-btn" onclick="window.print()">🖨️ طباعة / PDF</button>
 
 <script>
-// Highlight active nav item on scroll
 const phases = document.querySelectorAll('.phase');
 const jSteps = document.querySelectorAll('.j-step');
 const obs = new IntersectionObserver((entries) => {
@@ -1576,9 +1540,14 @@ const obs = new IntersectionObserver((entries) => {
     if (e.isIntersecting) {
       jSteps.forEach(s => s.classList.remove('active'));
       const id = e.target.id;
-      const num = id.replace('phase','');
-      const active = document.querySelector(`.j-step.p${num}`);
-      if (active) active.classList.add('active');
+      if (id === 'phase4b') {
+        const active = document.querySelector('.j-step.p4b');
+        if (active) active.classList.add('active');
+      } else {
+        const num = id.replace('phase','');
+        const active = document.querySelector(`.j-step.p${num}`);
+        if (active) active.classList.add('active');
+      }
     }
   });
 }, { threshold: 0.3 });
